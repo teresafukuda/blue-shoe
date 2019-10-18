@@ -20,12 +20,14 @@ shoe_id_table <- read_csv("Shoe ID table - will be revised - Sheet1.csv")
 
 # Part II. Clean up the biweekly data and summarize into totals by name of user
 
-totals_biweekly <- biweeklydata  %>% 
-#  clean_names(.) %>% 
-  mutate("name"= `Name (First, Last)`) %>% # This may need to be changed to match whatever is in the actual survey right now (if it was changed since this is confusing)
-  mutate("steps"= `How many steps were taken in the test shoes during the past two weeks?`) %>% 
-  mutate ("miles"= `How many miles?`) %>% 
-  mutate ("minutes"= `How many minutes have been recorded while wearing the shoes?`) %>% 
+clean_biweekly <- biweeklydata  %>% 
+  clean_names(.)
+
+totals_biweekly <- clean_biweekly %>% 
+  mutate("name"= `name_first_last`) %>% # This may need to be changed to match whatever is in the actual survey right now (if it was changed since this is confusing)
+  mutate("steps"= `how_many_steps_were_taken_in_the_test_shoes_during_the_past_two_weeks`) %>% 
+  mutate ("miles"= `how_many_miles`) %>% 
+  mutate ("minutes"= `how_many_minutes_have_been_recorded_while_wearing_the_shoes`) %>% 
   select(name, steps, miles, minutes) %>% 
   group_by(name) %>% 
   summarize (steps= sum(steps),
