@@ -23,7 +23,8 @@ presurvey_data <- read_csv("Pre Survey Data - Sheet1.csv")
 # Part II. Clean up the biweekly data, presurvey data and summarize into totals by name of user
 
 clean_biweekly <- biweeklydata  %>% 
-  clean_names(.)
+  clean_names(.)  %>%
+  mutate_if(is.character, str_to_upper)
 
 totals_biweekly <- clean_biweekly %>% 
   mutate("name"= `name_first_last`) %>% # This may need to be changed to match whatever is in the actual survey right now (if it was changed since this is confusing)
@@ -41,7 +42,8 @@ totals_biweekly <- clean_biweekly %>%
 clean_pre <- presurvey_data  %>%
   rename("name"= 'X1') %>% 
   clean_names(.) %>% 
-  select(name,age, weight)
+  select(name,age, weight) %>% 
+  mutate_if(is.character, str_to_upper)
 
 # Part III. Clean up shoe ID data; keep participant, shoe, model 
 # Would probably be useful here to also include more info about each shoe model, such as type of rubber, type of shoe (lifestyle, running, hybrid), etc.
