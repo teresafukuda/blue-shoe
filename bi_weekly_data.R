@@ -16,7 +16,7 @@ library(lubridate) # load lubridate to work with dates and times
 
 biweeklydata <- read_csv("Bi-Weekly Wear Test Form Oct.csv") # edit file name to match the downloaded file (the one I used to test this was edited with a bunch of fake data)
 
-shoe_id_table <- read_csv("Shoe ID table - will be revised - Sheet1.csv")
+shoe_id_table <- read_csv("ShoeID_data_forR.csv")
 
 presurvey_data <- read_csv("Pre Survey Data - Sheet1.csv")
 
@@ -51,12 +51,13 @@ clean_pre <- presurvey_data  %>%
 clean_shoe_ID <- shoe_id_table %>% 
   clean_names(.) %>% 
   mutate (name=participant) %>% 
+  mutate_if(is.character, str_to_upper) %>% 
   select(shoe_id_left,shoe_id_right,model,name)
 
 # Part IV. Merge shoe ID data with each users reported miles/steps/minutes
 
 # right now the names columns are not quite aligned, for example JAMES is Fuller, James in one and James in the other
 
-# wear_data_joined <- full_join(clean_biweekly,clean_shoe_ID)
+wear_data_joined <- full_join(totals_biweekly,clean_shoe_ID)
 
 pre_data_joined <- full_join(totals_biweekly,clean_pre) # this dataframe is a gross mess but it's a start!
