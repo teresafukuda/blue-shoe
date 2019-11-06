@@ -14,7 +14,7 @@ library(lubridate) # load lubridate to work with dates and times
 
 # I made this so that you can download the data from the Google Drive as a csv and import directly into here, no edits
 
-biweeklydata <- read_csv("Bi-Weekly Wear Test Form Oct.csv") # edit file name to match the downloaded file (the one I used to test this was edited with a bunch of fake data)
+biweeklydata <- read_csv("Bi-Weekly Wear Test Form.csv") # edit file name to match the downloaded file (the one I used to test this was edited with a bunch of fake data)
 
 shoe_id_table <- read_csv("ShoeID_data_forR.csv")
 
@@ -61,3 +61,4 @@ clean_shoe_ID <- shoe_id_table %>%
 wear_data_joined <- full_join(totals_biweekly,clean_shoe_ID)
 
 pre_data_joined <- full_join(totals_biweekly,clean_pre) # this dataframe is a gross mess but it's a start!
+
