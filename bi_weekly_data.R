@@ -60,5 +60,5 @@ clean_shoe_ID <- shoe_id_table %>%
 
 wear_data_joined <- full_join(totals_biweekly,clean_shoe_ID)
 
-pre_data_joined <- full_join(totals_biweekly,clean_pre) # this dataframe is a gross mess but it's a start!
+pre_data_joined <- full_join(wear_data_joined,clean_pre) # this dataframe is a gross mess but it's a start!
 
