@@ -93,5 +93,23 @@ clean_mass <- mass_data %>%
 
 mass_data_joined <- full_join(pre_data_joined,clean_mass)
 
+step_calculations <- mass_data_joined %>% 
+  mutate("km"= miles*1.60934) %>% 
+  mutate("g_per_km"= grams_lost/km) %>% 
+  mutate("weight_kg"= weight*0.453592) %>% 
+  mutate("g_per_km_per_kg"=g_per_km/weight_kg)
+
 
 # Part VII. Visualize data loss per style, loss per rubber type, overall loss per mile, loss per mile per pound of force?
+
+# grams loss per shoe for each style
+
+# grams loss per shoe for each rubber type across styles
+
+# overall loss per km
+
+# loss per km per kg body weight
+
+
+
+
