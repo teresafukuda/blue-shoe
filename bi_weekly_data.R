@@ -56,9 +56,15 @@ clean_shoe_ID <- shoe_id_table %>%
 
 # Part IV. Merge shoe ID data with each users reported miles/steps/minutes
 
-# right now the names columns are not quite aligned, for example JAMES is Fuller, James in one and James in the other
 
 wear_data_joined <- full_join(totals_biweekly,clean_shoe_ID)
 
 pre_data_joined <- full_join(wear_data_joined,clean_pre) # this dataframe is a gross mess but it's a start!
 
+# need to add shoe specs (rubber type, hardness, abrasion rating, etc.)
+
+# Part V. Preliminary data visualization
+
+# Part VI. Add the post-wear measurement data and calculate the loss per mile, loss per step, normalize by body weight??
+
+# Part VII. Visualize data loss per style, loss per rubber type, overall loss per mile, loss per mile per pound of force?
