@@ -20,6 +20,9 @@ shoe_id_table <- read_csv("ShoeID_data_forR.csv")
 
 presurvey_data <- read_csv("Pre Survey Data - Sheet1.csv")
 
+mass_data <- read_csv("Shoe_mass_forR - Sheet1.csv")
+
+
 # Part II. Clean up the biweekly data, presurvey data and summarize into totals by name of user
 
 clean_biweekly <- biweeklydata  %>% 
@@ -52,19 +55,43 @@ clean_shoe_ID <- shoe_id_table %>%
   clean_names(.) %>% 
   mutate (name=participant) %>% 
   mutate_if(is.character, str_to_upper) %>% 
-  select(shoe_id_left,shoe_id_right,model,name)
+  select(shoe_id_left,shoe_id_right,model,name) %>% 
+  mutate(shoe_id_left=gsub("-","",.$shoe_id_left)) %>% 
+  mutate(shoe_id_right=gsub("-","",.$shoe_id_right)) %>%
+  mutate(shoe_id_left=gsub(" ","",.$shoe_id_left)) %>% 
+  mutate(shoe_id_right=gsub(" ","",.$shoe_id_right)) %>% 
+  gather("delete","shoe_ID", 1:2)
+  
 
 # Part IV. Merge shoe ID data with each users reported miles/steps/minutes
 
-
 wear_data_joined <- full_join(totals_biweekly,clean_shoe_ID)
 
-pre_data_joined <- full_join(wear_data_joined,clean_pre) # this dataframe is a gross mess but it's a start!
+pre_data_joined <- full_join(wear_data_joined,clean_pre)
 
 # need to add shoe specs (rubber type, hardness, abrasion rating, etc.)
 
-# Part V. Preliminary data visualization
+# Part V. Clean up mass data
+
+# make mass data tidy first, then find average of pre and post mass, then find difference
+
+clean_mass <- mass_data %>% 
+  gather ("trial","mass",3:12) %>%
+  mutate("prepost"= case_when(trial=="pre1"|trial=="pre2"|trial=="pre3"|trial=="pre4"|trial=="pre5" ~ "pre", TRUE~"post")) %>% 
+  group_by(`Shoe ID`,`prepost`) %>% 
+  mutate(mass= as.double(mass))  %>% 
+  summarize("average"=mean(mass)) %>%  # averages of pre and post data for each shoe ID
+  spread(.,prepost, average) %>% # separate pre and post columns
+  mutate("grams_lost"= pre-post) %>% 
+  mutate("shoe_ID"= `Shoe ID`)
+
 
 # Part VI. Add the post-wear measurement data and calculate the loss per mile, loss per step, normalize by body weight??
+
+# join the wear data and the pre and post mass data
+
+
+mass_data_joined <- full_join(pre_data_joined,clean_mass)
+
 
 # Part VII. Visualize data loss per style, loss per rubber type, overall loss per mile, loss per mile per pound of force?
