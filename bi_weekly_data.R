@@ -45,8 +45,11 @@ totals_biweekly <- clean_biweekly %>%
 clean_pre <- presurvey_data  %>%
   rename("name"= 'X1') %>% 
   clean_names(.) %>% 
-  select(name,age, weight) %>% 
+  mutate ("gait" = question_11) %>% 
+  select(name,age, weight, gait) %>% 
   mutate_if(is.character, str_to_upper)
+
+  
 
 # Part III. Clean up shoe ID data; keep participant, shoe, model 
 # Would probably be useful here to also include more info about each shoe model, such as type of rubber, type of shoe (lifestyle, running, hybrid), etc.
@@ -109,6 +112,8 @@ step_calculations <- mass_data_joined %>%
 # overall loss per km
 
 # loss per km per kg body weight
+
+
 
 
 
