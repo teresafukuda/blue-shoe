@@ -86,7 +86,8 @@ clean_mass <- mass_data %>%
   summarize("average"=mean(mass)) %>%  # averages of pre and post data for each shoe ID
   spread(.,prepost, average) %>% # separate pre and post columns
   mutate("grams_lost"= pre-post) %>% 
-  mutate("shoe_ID"= `Shoe ID`)
+  mutate("shoe_ID"= `Shoe ID`) %>% 
+  select (-c(delete))
 
 
 # Part VI. Add the post-wear measurement data and calculate the loss per mile, loss per step, normalize by body weight??
@@ -104,16 +105,36 @@ step_calculations <- mass_data_joined %>%
 
 
 # Part VII. Visualize data loss per style, loss per rubber type, overall loss per mile, loss per mile per pound of force?
+#age_vis <- ggplot(clean_pre, aes(x=age)) + 
+#geom_histogram()
 
-# grams loss per shoe for each style
+###### grams loss per shoe for each style######
 
-# grams loss per shoe for each rubber type across styles
-
-# overall loss per km
-
-# loss per km per kg body weight
+#histogram of grams lost for all shoes
+grams_per_shoe <- ggplot(step_calculations, aes(x=grams_lost))+
+  geom_histogram()
 
 
+#histogram of grams/km broken up by style-- not particularly useful because of so few data points per style
+per_shoe_style <- step_calculations %>% 
+  group_by(model) %>% 
+  ggplot(., aes(x=g_per_km))+
+  geom_histogram()+
+  facet_wrap(~model)
+
+######## grams loss per shoe for each rubber type across styles #######
+
+
+###### overall loss per km #######
+#histogram of grams/km for all shoes
+grams_per_shoe <- ggplot(step_calculations, aes(x=g_per_km))+
+  geom_histogram()
+
+####### loss per km per kg body weight ########
+
+#histogram of grams/km/kg weight for all shoes
+grams_per_bodyweight <- ggplot(step_calculations, aes(x=g_per_km_per_kg))+
+  geom_histogram()
 
 
 
