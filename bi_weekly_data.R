@@ -2,8 +2,8 @@
 ########################################################
 ## Bi-Weekly Wear Test Data Management 
 ## ... an attempt to import the data and make it into a usable form for eas[ier] analysis
-## by Teresa
-## because I'm bored
+## by Teresa Fukuda
+## 
 ##########################################################
 
 # Part I. Load packages and import data
@@ -110,7 +110,7 @@ mass_data_joined <- full_join(pre_data_joined,clean_mass)
 full_data_joined <- full_join(mass_data_joined, clean_shoedeets) %>%  #join all pre and post mass data, participant age/weight/name, shoe model/rubber/abrasion
   select (-c('delete'))
   
-step_calculations <- mass_data_joined %>% 
+step_calculations <- full_data_joined %>% 
   mutate("km"= miles*1.60934) %>% 
   mutate("g_per_km"= grams_lost/km) %>% 
   mutate("weight_kg"= weight*0.453592) %>% 
@@ -121,7 +121,7 @@ step_calculations <- mass_data_joined %>%
 #age_vis <- ggplot(clean_pre, aes(x=age)) + 
 #geom_histogram()
 
-###### grams loss per shoe for each style######
+### grams loss per shoe for each style###
 
 #histogram of grams lost for all shoes
 grams_per_shoe <- ggplot(step_calculations, aes(x=grams_lost))+
@@ -135,20 +135,31 @@ per_shoe_style <- step_calculations %>%
   geom_histogram()+
   facet_wrap(~model)
 
-######## grams loss per shoe for each rubber type across styles #######
 
 
-###### overall loss per km #######
+#### grams loss per shoe for each rubber type across styles ###
+
+
+
+### overall loss per km ####
 #histogram of grams/km for all shoes
 grams_per_shoe <- ggplot(step_calculations, aes(x=g_per_km))+
   geom_histogram()
 
-####### loss per km per kg body weight ########
+### loss per km per kg body weight ####
 
 #histogram of grams/km/kg weight for all shoes
 grams_per_bodyweight <- ggplot(step_calculations, aes(x=g_per_km_per_kg))+
   geom_histogram()
 
+### loss per km per kg body weight by abrasion rating ###
+grams_per_bodyweight_abrasion <- ggplot(step_calculations, aes(x=g_per_km_per_kg))+
+  geom_histogram()+
+  facet_wrap(~abrasion)
 
+### loss per km per kg body weight by hardness rating ###
+grams_per_bodyweight_hardness <- ggplot(step_calculations, aes(x=g_per_km_per_kg))+
+  geom_histogram()+
+  facet_wrap(~hardness)
 
 
