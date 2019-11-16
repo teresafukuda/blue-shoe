@@ -16,11 +16,13 @@ library(lubridate) # load lubridate to work with dates and times
 
 biweeklydata <- read_csv("Bi-Weekly Wear Test Form.csv") # edit file name to match the downloaded file (the one I used to test this was edited with a bunch of fake data)
 
-shoe_id_table <- read_csv("ShoeID_data_forR.csv")
+shoe_id_table <- read_csv("ShoeID_data_forR.csv") # table from google sheets of all participants and their shoe models and ID
 
-presurvey_data <- read_csv("Pre Survey Data - Sheet1.csv")
+presurvey_data <- read_csv("Pre Survey Data - Sheet1.csv") #all the presurvey data
 
-mass_data <- read_csv("Shoe_mass_forR - Sheet1.csv")
+mass_data <- read_csv("Shoe_mass_forR - Sheet1.csv") #this has the shoe weight data for before and after testing in grams
+
+shoe_deets <- read_csv("ShoeID_data_forR - Sheet2.csv") # sheet 2 in the google sheet has the shoe details about rubber, abrasion, etc.
 
 
 # Part II. Clean up the biweekly data, presurvey data and summarize into totals by name of user
@@ -74,7 +76,14 @@ pre_data_joined <- full_join(wear_data_joined,clean_pre)
 
 # need to add shoe specs (rubber type, hardness, abrasion rating, etc.)
 
-# Part V. Clean up mass data
+# Part V. Clean up mass data and join with shoe traits (rubber type, abrasion rating, etc.)
+
+# clean up shoe details
+
+clean_shoedeets <- shoe_deets %>% 
+  select(Model, hardness, abrasion, rubber_type) %>% 
+  clean_names(.) %>% 
+  mutate_if(is.character, str_to_upper)
 
 # make mass data tidy first, then find average of pre and post mass, then find difference
 
@@ -87,7 +96,8 @@ clean_mass <- mass_data %>%
   spread(.,prepost, average) %>% # separate pre and post columns
   mutate("grams_lost"= pre-post) %>% 
   mutate("shoe_ID"= `Shoe ID`) %>% 
-  select (-c(delete))
+  select (-c('Shoe ID'))
+
 
 
 # Part VI. Add the post-wear measurement data and calculate the loss per mile, loss per step, normalize by body weight??
@@ -97,6 +107,9 @@ clean_mass <- mass_data %>%
 
 mass_data_joined <- full_join(pre_data_joined,clean_mass)
 
+full_data_joined <- full_join(mass_data_joined, clean_shoedeets) %>%  #join all pre and post mass data, participant age/weight/name, shoe model/rubber/abrasion
+  select (-c('delete'))
+  
 step_calculations <- mass_data_joined %>% 
   mutate("km"= miles*1.60934) %>% 
   mutate("g_per_km"= grams_lost/km) %>% 
