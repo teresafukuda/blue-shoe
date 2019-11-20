@@ -116,6 +116,8 @@ step_calculations <- full_data_joined %>%
   mutate("weight_kg"= weight*0.453592) %>% 
   mutate("g_per_km_per_kg"=g_per_km/weight_kg)
 
+#compare steps to miles and choose "best"?
+
 
 # Part VII. Visualize data loss per style, loss per rubber type, overall loss per mile, loss per mile per pound of force?
 #age_vis <- ggplot(clean_pre, aes(x=age)) + 
@@ -161,5 +163,12 @@ grams_per_bodyweight_abrasion <- ggplot(step_calculations, aes(x=g_per_km_per_kg
 grams_per_bodyweight_hardness <- ggplot(step_calculations, aes(x=g_per_km_per_kg))+
   geom_histogram()+
   facet_wrap(~hardness)
+
+
+#Part VIII. Statistical testing
+
+# Hardness, abrasion, rubber type, geometry
+# Rate of shoe abrasion? g/km/kg/time across all shoes to see if it's linear relationship (time v. abrasion rate)
+
 
 
