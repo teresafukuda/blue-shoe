@@ -81,7 +81,7 @@ pre_data_joined <- full_join(wear_data_joined,clean_pre)
 # clean up shoe details
 
 clean_shoedeets <- shoe_deets %>% 
-  select(Model, hardness, abrasion, rubber_type) %>% 
+  select(Model, hardness, abrasion, rubber_type,geometry) %>% 
   clean_names(.) %>% 
   mutate_if(is.character, str_to_upper)
 
@@ -170,5 +170,8 @@ grams_per_bodyweight_hardness <- ggplot(step_calculations, aes(x=g_per_km_per_kg
 # Hardness, abrasion, rubber type, geometry
 # Rate of shoe abrasion? g/km/kg/time across all shoes to see if it's linear relationship (time v. abrasion rate)
 
+# some summary information
 
-
+summary_hardness <- full_data_joined %>% 
+  group_by(geometry) %>% 
+  summarize("count"= n())
