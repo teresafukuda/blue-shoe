@@ -14,11 +14,11 @@ library(lubridate) # load lubridate to work with dates and times
 
 # I made this so that you can download the data from the Google Drive as a csv and import directly into here, no edits
 
-biweeklydata <- read_csv("Bi-Weekly Wear Test Form.csv") # edit file name to match the downloaded file (the one I used to test this was edited with a bunch of fake data)
+biweeklydata <- read_csv("Bi-Weekly Wear Test Form (Responses) - Form Responses 1 (1).csv") # edit file name to match the downloaded file, updated 12/3
 
-shoe_id_table <- read_csv("ShoeID_data_forR.csv") # table from google sheets of all participants and their shoe models and ID
+shoe_id_table <- read_csv("ShoeID_data_forR - Sheet3.csv") # table from google sheets of all participants and their shoe models and ID, updated 12/3
 
-presurvey_data <- read_csv("Pre Survey Data - Sheet1.csv") #all the presurvey data
+presurvey_data <- read_csv("Pre Survey Data - Sheet1.csv") #all the presurvey data, updated 12/3
 
 mass_data <- read_csv("Shoe_mass_forR - Sheet1.csv") #this has the shoe weight data for before and after testing in grams
 
@@ -105,7 +105,8 @@ clean_mass <- mass_data %>%
 mass_data_joined <- full_join(pre_data_joined,clean_mass)
 
 full_data_joined <- full_join(mass_data_joined, clean_shoedeets) %>%  #join all pre and post mass data, participant age/weight/name, shoe model/rubber/abrasion
-  select (-c('delete'))
+  select (-c('delete')) %>% 
+  filter(!is.na(name))
   
 step_calculations <- full_data_joined %>% 
   mutate("km"= miles*1.60934) %>% 
@@ -119,6 +120,13 @@ step_calculations <- full_data_joined %>%
 # Part VII. Visualize data loss per style, loss per rubber type, overall loss per mile, loss per mile per pound of force?
 #age_vis <- ggplot(clean_pre, aes(x=age)) + 
 #geom_histogram()
+
+# steps per person
+steps_per_person <- ggplot(full_data_joined, aes(x=name, y=steps/1000)) +
+  geom_point()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+steps_per_person
 
 ### grams loss per shoe for each style###
 
