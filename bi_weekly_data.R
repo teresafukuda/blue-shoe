@@ -29,7 +29,8 @@ shoe_deets <- read_csv("ShoeID_data_forR - Sheet2.csv") # sheet 2 in the google 
 
 clean_biweekly <- biweeklydata  %>% 
   clean_names(.)  %>%
-  mutate_if(is.character, str_to_upper) # make all character labels uppercase
+  mutate_if(is.character, str_to_upper) %>% # make all character labels uppercase
+  filter(!is.na(how_many_steps_were_taken_in_the_test_shoes_during_the_past_two_weeks)) 
 
 totals_biweekly <- clean_biweekly %>% 
   mutate("name"= `name_first_last`) %>% # This may need to be changed to match whatever is in the actual survey right now (if it was changed since this is confusing)
