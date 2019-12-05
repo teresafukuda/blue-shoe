@@ -232,11 +232,11 @@ washing_error <- washing_test %>%
 # Using the preliminary mass data to find the expected range of manufacturer variation in mass (not sure if this is relevant at all)
 
 mass_model_join <- clean_mass %>% 
-  full_join(.,clean_shoe_ID) %>% 
+  full_join(.,clean_shoe_ID) %>%
+  mutate("control"=case_when(name=="CONTROL"~"control", TRUE~"worn")) %>% 
   filter(!is.na(pre)) %>% 
-  group_by(model) %>% 
-  summarize("mean_mass"=mean(pre),
-            "stdev_mass"=sd(pre))
+  group_by(model,control) %>% 
+  summarize("change"=mean(post-pre))
 
 endless_run_premass <- clean_mass %>% # trying to see what is going on with endless run mass measurements
   full_join(.,clean_shoe_ID) %>% 
@@ -260,5 +260,5 @@ premass_error<- mass_data %>%
             "sd"=sd(mass)) %>% 
   ungroup() %>% 
   summarize("avgsd"=mean(sd))
-# need to do some statistical test for this?
+# don't think this is incredibly valuable, just interesting
 
