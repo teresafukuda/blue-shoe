@@ -6,6 +6,9 @@
 ## 
 ##########################################################
 
+
+
+
 # Part I. Load packages and import data
 
 library(tidyverse) # hello tidyverse
@@ -24,6 +27,7 @@ mass_data <- read_csv("Shoe_mass_forR - Sheet1.csv") #this has the shoe weight d
 
 shoe_deets <- read_csv("ShoeID_data_forR - Sheet2.csv") # sheet 2 in the google sheet has the shoe details about rubber, abrasion, etc.
 
+washing_test <- read_csv("WashingTestError - Sheet1.csv") # washing test pre and post measurements
 
 # Part II. Clean up the biweekly data, presurvey data and summarize into totals by name of user
 
@@ -52,6 +56,8 @@ clean_pre <- presurvey_data  %>%
   select(name,age, weight, gait) %>% 
   mutate_if(is.character, str_to_upper) # takes name, age, weight, and gait from pre-survey; makes data ALL CAPS
 
+
+
   
 
 # Part III. Clean up shoe ID data; keep participant, shoe, model 
@@ -65,14 +71,21 @@ clean_shoe_ID <- shoe_id_table %>%
   mutate(shoe_id_right=gsub("-","",.$shoe_id_right)) %>%
   mutate(shoe_id_left=gsub(" ","",.$shoe_id_left)) %>% 
   mutate(shoe_id_right=gsub(" ","",.$shoe_id_right)) %>% 
-  gather("delete","shoe_ID", 1:2)
+  gather("delete","shoe_ID", 1:2) %>% 
+  select (-c('delete'))
   
+
+
+
 
 # Part IV. Merge shoe ID data with each users reported miles/steps/minutes
 
 wear_data_joined <- full_join(totals_biweekly,clean_shoe_ID)
 
 pre_data_joined <- full_join(wear_data_joined,clean_pre) #joins the step data, shoe ID, and pre survey data
+
+
+
 
 
 # Part V. Clean up mass data and join with shoe traits (rubber type, abrasion rating, etc.)
@@ -100,6 +113,9 @@ clean_mass <- mass_data %>%
 ## calculate error in mass measurements?
 
 
+
+
+
 # Part VI. Add the post-wear measurement data and calculate the loss per mile, loss per step, normalize by body weight??
 
 # join the wear data and the pre and post mass data
@@ -118,6 +134,9 @@ step_calculations <- full_data_joined %>%
   mutate("g_per_milesteps_per_kg"=g_per_milesteps/weight_kg)
 
 #compare steps to miles and choose "best"?
+
+
+
 
 
 # Part VII. Visualize data loss per style, loss per rubber type, overall loss per mile, loss per mile per pound of force?
@@ -174,6 +193,9 @@ grams_per_bodyweight_hardness <- ggplot(step_calculations, aes(x=g_per_km_per_kg
   facet_wrap(~hardness)
 grams_per_bodyweight_hardness
 
+
+
+
 #Part VIII. Statistical testing
 
 # Hardness, abrasion, rubber type, geometry
@@ -189,7 +211,54 @@ summary_model <- full_data_joined %>%
 # some sort of test across all parameters?
 # comparing mass loss and change in tread depth
 
-# Part IX. Washing Test Error
-# Using the washing test data from the 6 sample shoes to find the error in the calculations
 
+
+
+# Part IX. Finding Error in our measurements
+
+# Using the washing test data from the 6 sample shoes to find the error in the calculations-- how much of the change of mass might be due to washing?
+
+#creates a df with the averages of pre and post washing weights, and the difference (post-pre)
+washing_error <- washing_test %>% 
+  gather ("trial","mass",2:11) %>% 
+  mutate("prepost"= case_when(trial=="initial1"|trial=="initial2"|trial=="initial3"|trial=="initial4"|trial=="initial5" ~ "pre", TRUE~"post")) %>% 
+  group_by(shoe_ID,prepost) %>% 
+  summarize(average=mean(mass)) %>% 
+  spread(.,prepost, average) %>% # separate pre and post columns
+  mutate("change_post_to_pre"= post-pre)
+
+
+
+# Using the preliminary mass data to find the expected range of manufacturer variation in mass (not sure if this is relevant at all)
+
+mass_model_join <- clean_mass %>% 
+  full_join(.,clean_shoe_ID) %>% 
+  filter(!is.na(pre)) %>% 
+  group_by(model) %>% 
+  summarize("mean_mass"=mean(pre),
+            "stdev_mass"=sd(pre))
+
+endless_run_premass <- clean_mass %>% # trying to see what is going on with endless run mass measurements
+  full_join(.,clean_shoe_ID) %>% 
+  filter(!is.na(pre)) %>% 
+  filter(model=="REEBOK ENDLESS RUN")
+
+endless_run_premass_plot <- ggplot(endless_run_premass, aes(x=pre)) +
+  geom_histogram()
+endless_run_premass_plot #spread of mass measurements from 240 to 280 grams... yikes. 
+
+#this gives us the measurement error from the balance/us
+# spread of our pre mass measurements, can ALSO add variation in post measurements when/if we get those too
+# premass_error gives a single value, the average of the standard deviations of our mass measurements... not sure if this is valid
+premass_error<- mass_data %>% 
+  gather ("trial","mass",3:12) %>%
+  mutate("prepost"= case_when(trial=="pre1"|trial=="pre2"|trial=="pre3"|trial=="pre4"|trial=="pre5" ~ "pre", TRUE~"post")) %>% 
+  group_by(`Shoe ID`,`prepost`) %>% 
+  mutate(mass= as.double(mass)) %>% 
+  filter(prepost=="pre") %>% 
+  summarize("average"=mean(mass),
+            "sd"=sd(mass)) %>% 
+  ungroup() %>% 
+  summarize("avgsd"=mean(sd))
+# need to do some statistical test for this?
 
