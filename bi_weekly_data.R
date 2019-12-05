@@ -16,7 +16,7 @@ library(lubridate) # load lubridate to work with dates and times
 
 biweeklydata <- read_csv("Bi-Weekly Wear Test Form (Responses) - Form Responses 1 (1).csv") # edit file name to match the downloaded file, updated 12/3
 
-shoe_id_table <- read_csv("ShoeID_data_forR - Sheet3.csv") # table from google sheets of all participants and their shoe models and ID, updated 12/3
+shoe_id_table <- read_csv("ShoeID_data_forR - 12_4 update.csv") # table from google sheets of all participants and their shoe models and ID, updated 12/3
 
 presurvey_data <- read_csv("Pre Survey Data - Sheet1.csv") #all the presurvey data, updated 12/3
 
@@ -42,8 +42,8 @@ totals_biweekly <- clean_biweekly %>%
   summarize (steps= sum(steps),
              miles= sum(miles)) %>% #,
              #minutes=sum(minutes)) 
-  mutate ("steps to miles" = steps/2250) %>% 
-  mutate ("miles to steps" = miles*2250)# assuming 2250 steps on average per mile
+  mutate ("steps to miles" = steps/2000) %>% 
+  mutate ("miles to steps" = miles*2000)# assuming 2000 steps on average per mile
 
 clean_pre <- presurvey_data  %>%
   rename("name"= 'X1') %>% 
@@ -72,7 +72,7 @@ clean_shoe_ID <- shoe_id_table %>%
 
 wear_data_joined <- full_join(totals_biweekly,clean_shoe_ID)
 
-pre_data_joined <- full_join(wear_data_joined,clean_pre)
+pre_data_joined <- full_join(wear_data_joined,clean_pre) #joins the step data, shoe ID, and pre survey data
 
 
 # Part V. Clean up mass data and join with shoe traits (rubber type, abrasion rating, etc.)
@@ -97,6 +97,7 @@ clean_mass <- mass_data %>%
   mutate("shoe_ID"= `Shoe ID`) %>% 
   select (-c('Shoe ID'))
 
+## calculate error in mass measurements?
 
 
 # Part VI. Add the post-wear measurement data and calculate the loss per mile, loss per step, normalize by body weight??
@@ -107,13 +108,14 @@ mass_data_joined <- full_join(pre_data_joined,clean_mass)
 
 full_data_joined <- full_join(mass_data_joined, clean_shoedeets) %>%  #join all pre and post mass data, participant age/weight/name, shoe model/rubber/abrasion
   select (-c('delete')) %>% 
-  filter(!is.na(name))
+  filter(!is.na(name)) %>% 
+  filter(name!="0") 
   
 step_calculations <- full_data_joined %>% 
-  mutate("km"= miles*1.60934) %>% 
-  mutate("g_per_km"= grams_lost/km) %>% 
+  mutate("milesteps"= steps/2000) %>% 
+  mutate("g_per_milesteps"= grams_lost/milesteps) %>% 
   mutate("weight_kg"= weight*0.453592) %>% 
-  mutate("g_per_km_per_kg"=g_per_km/weight_kg)
+  mutate("g_per_milesteps_per_kg"=g_per_milesteps/weight_kg)
 
 #compare steps to miles and choose "best"?
 
@@ -179,8 +181,8 @@ grams_per_bodyweight_hardness
 
 # some summary information
 
-summary_geometry <- full_data_joined %>% 
-  group_by(geometry) %>% 
+summary_model <- full_data_joined %>%
+  group_by(model) %>%
   summarize("count"= n())
 
 # t-tests among each parameter? (within geometry, abrasion, hardness, rubber type)
