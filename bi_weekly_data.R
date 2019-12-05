@@ -188,3 +188,8 @@ summary_model <- full_data_joined %>%
 # t-tests among each parameter? (within geometry, abrasion, hardness, rubber type)
 # some sort of test across all parameters?
 # comparing mass loss and change in tread depth
+
+# Part IX. Washing Test Error
+# Using the washing test data from the 6 sample shoes to find the error in the calculations
+
+
