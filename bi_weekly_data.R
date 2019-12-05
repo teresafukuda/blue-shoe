@@ -248,8 +248,8 @@ endless_run_premass_plot <- ggplot(endless_run_premass, aes(x=pre)) +
 endless_run_premass_plot #spread of mass measurements from 240 to 280 grams... yikes. 
 
 #this gives us the measurement error from the balance/us
-# spread of our pre mass measurements, can ALSO add variation in post measurements when/if we get those too
-# premass_error gives a single value, the average of the standard deviations of our mass measurements... not sure if this is valid
+# spread of our pre mass measurements, can add variation in post measurements when/if we get those too
+# premass_error gives a single value in grams, the average of the standard deviations of our mass measurements... not sure if this is valid
 premass_error<- mass_data %>% 
   gather ("trial","mass",3:12) %>%
   mutate("prepost"= case_when(trial=="pre1"|trial=="pre2"|trial=="pre3"|trial=="pre4"|trial=="pre5" ~ "pre", TRUE~"post")) %>% 
