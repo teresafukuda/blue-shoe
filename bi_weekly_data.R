@@ -29,6 +29,8 @@ shoe_deets <- read_csv("ShoeID_data_forR - Sheet2.csv") # sheet 2 in the google 
 
 washing_test <- read_csv("WashingTestError - Sheet1.csv") # washing test pre and post measurements
 
+tread_depth_raw <- read_csv("Shoe Depth Measurements - Initial - Sheet1.csv")
+
 # Part II. Clean up the biweekly data, presurvey data and summarize into totals by name of user
 
 clean_biweekly <- biweeklydata  %>% 
@@ -261,4 +263,18 @@ premass_error<- mass_data %>%
   ungroup() %>% 
   summarize("avgsd"=mean(sd))
 # don't think this is incredibly valuable, just interesting
+
+
+# Part X. Considering Tread Depth
+
+# clean up tread depth measurements: find average of the three measurements, summarize by model and location
+
+tread_initial <- tread_depth_raw %>% 
+  group_by(model, location) %>% 
+  summarize("avg_depth"=mean(initial_mm
+                             ))
+
+
+
+
 
