@@ -1,0 +1,39 @@
+Timestamp,name,Shoe ID Left (ex: L1),Shoe ID Right (ex: R1) (same as left ID!),zip_code,total_current,athletic,casual,dress,sandal,other,other_specific,total_owned,used_purchase,retired_from_wear,retired_ugly,fit_of_shoes,performance_of_shoes,wear_frequency,shoe_comfort,breakin_period,shoe_blisters,wouldyoubuy_shoes,previous_adidas,compare_wear_other_adidas,traction,durability,shoes_wore_faster,wantback
+12/26/2019 13:33:25,Andrew Llanes,L18,R18,92127,3,1,3,0,0,0,,10+,0,5+,5+,5,5,Once a month,5,0 weeks,1,2,Yes,No,,,,Yes
+1/2/2020 14:30:30,Bri Winkler,L30,R30,93013,5,1,2,0,2,0,,10+,1,1,0,4,4,Once a month,4,0 weeks,1,3,Yes,No,,,Neutral,Yes
+12/25/2019 21:38:30,Calvin Chau,L60,R60,92683,5,1,2,1,1,0,,8,0,1,0,5,4,Almost every day,4,2 weeks,3,3,Yes,No,I did not notice a difference,I did not notice a difference,Somewhat Disagree,Yes
+12/26/2019 9:04:00,Christopher Kim,L-24,R-24,92078,6,2,3,0,1,0,,9,0,2,0,2,4,Once a week,4,0 weeks,1,2,Yes,Yes,I did not notice a difference,I did not notice a difference,Neutral,Yes
+12/3/2019 20:39:45,Daniel Elkin,L45,R45,93109,3,2,2,1,1,1,,4,1,1,0,5,5,4 to 5 times a week,5,3 weeks,1,2,No,No,,,,
+12/9/2019 19:26:34,David Mun (Adizero),L33,R33,90034,10+,3,10+,1,1,0,,10+,1,1,0,5,5,Once a week,5,0 weeks,1,3,Yes,No,I did not notice a difference,I did not notice a difference,Strongly Disagree,Yes
+12/9/2019 19:28:09,David Mun (Stella),L37,L37,90034,10+,3,10+,1,1,0,,10+,1,1,0,5,5,1 to 3 times a week,5,0 weeks,1,5,Yes,No,I did not notice a difference,I did not notice a difference,Strongly Disagree,Yes
+12/27/2019 3:09:23,Duncan Chung,L27,R27,92086,6,1,3,0,2,0,,6,2,1,0,5,4,4 to 5 times a week,3,1 week,1,2,Yes,No,I did not notice a difference,I did not notice a difference,Somewhat Agree,No
+12/6/2019 10:18:34,Gary Fox,L35,R35,93105,10+,8,5,1,0,0,,10+,1,1,1,3,2,Once a week,2,0 weeks,1,1,Yes,No,,,Neutral,Yes
+12/26/2019 10:09:19,Henry Cheung,L48,R48,91780,5,2,2,1,0,0,,7,0,1,0,5,4,4 to 5 times a week,4,1 week,1,3,Yes,Yes,Better,I did not notice a difference,Somewhat Agree,Yes
+12/7/2019 9:08:51,James fuller ,L26,R26,93101,10+,4,6,2,0,6,"Skate shoes(vans, Huf)",10+,4+,5+,4,5,5,1 to 3 times a week,4,1 week,1,3,Yes,Yes,Better,Better,Strongly Disagree,Yes
+12/3/2019 20:08:42,Jesse Goldstein,L65,R65,,4,2,1,,1,,,9,1,0,0,5,5,4 to 5 times a week,5,1 week,1,1,No,No,,,Strongly Disagree,Yes
+12/4/2019 19:52:55,Juan Ramirez,L31,R31,93103,5,2,1,2,0,0,,5,2,2,1,3,5,1 to 3 times a week,3,1 week,1,3,No,Yes,I did not notice a difference,Better,Neutral,No
+12/27/2019 13:55:47,Justin Tseng,L25,R25,92506,5,2,1,1,1,0,,6,0,0,0,3,3,Once a week,4,3 weeks,1,2,Yes,Yes,I did not notice a difference,Worse,Neutral,Yes
+12/25/2019 22:33:19,Kevin Akahoshi,L20,R20,92807,3,2,1,0,0,0,,10+,1,0,0,5,3,Almost every day,3,2 weeks,1,3,Yes,No,I did not notice a difference,I did not notice a difference,Neutral,No
+12/6/2019 9:05:23,Kyle Monper ,L53,R53,93117,3,1,0,0,1,1,Vasque hiking boots,5,0,0,0,5,5,4 to 5 times a week,4,0 weeks,1,1,Yes,No,,,Neutral,Yes
+12/6/2019 12:01:56,Laura Ingulsrud ,L04,R04,93101,9,1,4,2,2,0,,10+,1,1,0,3,3,Once a week,3,3 weeks,1,2,No,Does not apply,,,Neutral,Yes
+12/26/2019 0:29:00,Maddie Julian,L52,R52,95129,9,3,3,2,1,0,,10+,2,3,3,4,4,Once a week,4,0 weeks,1,3,Yes,No,,,Somewhat Disagree,Yes
+12/30/2019 7:36:55,Matt Panopio,L11,R11,98122,8,2,5,0,0,1,Boots,10+,0,1,1,4,3,1 to 3 times a week,3,0 weeks,1,2,Yes,No,,,Somewhat Disagree,Yes
+12/28/2019 8:30:06,Max Russer,L08,R08,93109,2,1,1,0,1,0,,5,1,1,0,3,2,Once a month,1,5+ weeks,2,1,Yes,No,,,Neutral,No
+12/21/2019 12:12:17,My Vo Luong,R39,R39,92844,6,2,2,1,1,0,,10+,0,1,0,4,5,1 to 3 times a week,5,0 weeks,1,3,Yes,No,I did not notice a difference,I did not notice a difference,Strongly Disagree,Yes
+12/29/2019 10:57:58,Nelson Gould,L10,R10,93106,5,2,2,0,1,0,,9,0,2,0,5,3,Once a week,3,1 week,1,2,Yes,Yes,I did not notice a difference,I did not notice a difference,Somewhat Disagree,Yes
+12/25/2019 20:08:47,Nicole Fenton,L05,R05,92024,7,1,3,2,1,,,10+,0,2,0,5,4,Once a week,4,1 week,2,3,Yes,No,,,Somewhat Disagree,Yes
+12/10/2019 13:59:52,Quentin Gee,L06,R06,93193,6,2,2,1,1,0,,10+,0,0,0,4,4,Once a week,3,3 weeks,1,2,No,Does not apply,,,,Yes
+12/7/2019 14:28:15,Rachel Torres,L70,R70,93117,9,3,2,1,2,0,,10+,1,2,0,2,3,Once a week,3,2 weeks,1,1,Yes,No,,,Strongly Disagree,No
+12/26/2019 1:39:54,Ryan Zahrae,L34,R34,92603,4,2,2,0,0,0,,7,0,1,0,4,5,Almost every day,4,1 week,1,2,Yes,No,,,Somewhat Disagree,Yes
+12/5/2019 21:34:35,Saffy Algarazi ,L66,R66,93109,2,2,4,6,1,0,"Vans slip ons, dress shoes, sandals ",5,1,3,2,5,5,Almost every day,4,2 weeks,1,3,Yes,Yes,I did not notice a difference,Better,Strongly Disagree,Yes
+12/9/2019 14:49:19,Thomas Butera,L71,R71,93117,3,0,3,0,0,0,,7,2,2,2,5,5,Once a month,4,1 week,1,1,Yes,No,,,Neutral,No
+12/12/2019 20:15:10,Thomas Butera,L71,R71,93117,3,0,3,0,0,0,,7,2,2,2,5,5,Once a month,4,0 weeks,1,1,Yes,No,I did not notice a difference,I did not notice a difference,Neutral,No
+12/12/2019 20:16:51,Thomas Butera,L75,L75,93117,3,0,3,0,0,0,,7,2,2,2,5,5,Once a month,4,0 weeks,1,1,Yes,No,I did not notice a difference,I did not notice a difference,Neutral,No
+12/26/2019 13:19:14,Travis Lee,L32,R32,93101,8,3,2,2,1,0,,8,0,1,0,4,5,Almost every day,5,0 weeks,1,4,No,Does not apply,,,,
+12/26/2019 0:45:43,Victor Nguyenbui,L21,R21,92604,5,2,1,1,1,0,,10+,1,1,1,4,5,4 to 5 times a week,5,2 weeks,1,3,Yes,No,,,Neutral,Yes
+12/6/2019 13:02:22,Vincent Thivierge,L65,R65,93117,4,2,1,0,1,0,,10+,1,1,0,4,4,Once a week,4,0 weeks,1,2,Yes,No,Better,Better,Somewhat Disagree,Yes
+12/26/2019 12:47:27,Woo Jin Kim,L50,R50,92833,4,2,1,0,1,0,,9,1,2,0,4,4,Almost every day,5,1 week,5,4,Yes,Yes,Better,I did not notice a difference,Somewhat Disagree,Yes
+1/6/2020 13:33:06,Michael Chung,L28,R28,92612,6,3,2,1,0,0,,10+,0,2,2,5,3,Once a week,3,1 week,1,2,Yes,No,,,Neutral,No
+1/6/2020 13:53:28,Bridget Gibbons,L76,R76,93101,6,1,3,0,2,0,,10+,0,0,1,3,3,Once a month,4,3 weeks,1,1,Yes,No,I did not notice a difference,I did not notice a difference,Strongly Disagree,No
+1/6/2020 14:08:22,Scott Bui,L64,R64,92841,4,3,0,0,1,0,n/a,6,1,1,1,4,4,4 to 5 times a week,4,1 week,1,5,No,Does not apply,,,Neutral,Yes
+1/6/2020 15:02:37,Erwin Gomez,L58,R58,92603,10+,6,4,0,1,0,,10+,2,1,2,4,2,Once a week,1,3 weeks,4,1,Yes,Yes,I did not notice a difference,I did not notice a difference,Neutral,No

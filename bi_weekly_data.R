@@ -58,10 +58,15 @@ clean_pre <- presurvey_data  %>%
   select(name,age, weight, gait) %>% 
   mutate_if(is.character, str_to_upper) # takes name, age, weight, and gait from pre-survey; makes data ALL CAPS
 
-
-
+# summarize pre survey data- gives us the demographics of the sample that we chose
+pre_summary <- clean_pre %>%
+  na.omit() %>% 
+  summarize(min_age=min(age),
+            max_age=max(age),
+            average_age=mean(age))
   
 
+  
 # Part III. Clean up shoe ID data; keep participant, shoe, model 
 
 clean_shoe_ID <- shoe_id_table %>% 
