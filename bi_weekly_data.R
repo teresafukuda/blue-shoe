@@ -7,6 +7,7 @@
 ##########################################################
 
 
+#### full_data_joined dataframe shoes step data, mass change, and shoe details for each participant (most "final" df) ####
 
 
 # Part I. Load packages and import data
@@ -119,8 +120,6 @@ clean_mass <- mass_data %>%
   mutate("shoe_ID"= `Shoe ID`) %>% 
   select (-c('Shoe ID'))
 
-## calculate error in mass measurements?
-
 
 
 
@@ -152,7 +151,7 @@ step_calculations <- full_data_joined %>%
 #age_vis <- ggplot(clean_pre, aes(x=age)) + 
 #geom_histogram()
 
-# steps per person
+# steps per person - shows steps per person (thousand steps)
 steps_per_person <- ggplot(full_data_joined, aes(x=name, y=steps/1000)) +
   geom_point()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
@@ -161,20 +160,20 @@ steps_per_person
 
 ### grams loss per shoe for each style###
 
-#histogram of grams lost for all shoes
+#histogram of grams lost for all shoes - using total grams lost, not normalized by steps
 grams_per_shoe <- ggplot(step_calculations, aes(x=grams_lost))+
   geom_histogram()
 
 grams_per_shoe
 
 
-#histogram of grams/km broken up by style-- not particularly useful because of so few data points per style
-per_shoe_style <- step_calculations %>% 
-  group_by(model) %>% 
-  ggplot(., aes(x=g_per_km))+
-  geom_histogram()+
-  facet_wrap(~model)
-per_shoe_style
+# #histogram of grams/km broken up by style-- not particularly useful because of so few data points per style
+# per_shoe_style <- step_calculations %>% 
+#   group_by(model) %>% 
+#   ggplot(., aes(x=g_per_km))+
+#   geom_histogram()+
+#   facet_wrap(~model)
+# per_shoe_style
 
 #### grams loss per shoe for each rubber type across styles ###
 
