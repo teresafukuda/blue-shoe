@@ -19,7 +19,7 @@ library(lubridate) # load lubridate to work with dates and times
 
 biweeklydata <- read_csv("Bi-Weekly Wear Test Form FINAL.csv") # edit file name to match the downloaded file, updated 1/6
 
-shoe_id_table <- read_csv("ShoeID_data_forR - 12_4 update.csv") # table from google sheets of all participants and their shoe models and ID, updated 12/3
+shoe_id_table <- read_csv("ShoeID_data_forR - EDITED 1_6.csv") # table from google sheets of all participants and their shoe models and ID, updated 1/6
 
 presurvey_data <- read_csv("Pre Survey Data - Sheet1.csv") #all the presurvey data, updated 12/3
 
@@ -80,7 +80,7 @@ clean_shoe_ID <- shoe_id_table %>%
   mutate(shoe_id_right=gsub(" ","",.$shoe_id_right)) %>% 
   gather("delete","shoe_ID", 1:2) %>% 
   select (-c('delete'))
-  
+
 
 
 
@@ -89,8 +89,10 @@ clean_shoe_ID <- shoe_id_table %>%
 
 wear_data_joined <- full_join(totals_biweekly,clean_shoe_ID)
 
-pre_data_joined <- full_join(wear_data_joined,clean_pre) #joins the step data, shoe ID, and pre survey data
-
+pre_data_joined <- full_join(wear_data_joined,clean_pre) %>% 
+  mutate(shoe_ID=gsub("-","",.$shoe_id)) %>% 
+  mutate(shoe_ID=gsub(" ","",.$shoe_ID)) 
+#joins the step data, shoe ID, and pre survey data
 
 
 
@@ -131,7 +133,8 @@ mass_data_joined <- full_join(pre_data_joined,clean_mass)
 
 full_data_joined <- full_join(mass_data_joined, clean_shoedeets) %>%  #join all pre and post mass data, participant age/weight/name, shoe model/rubber/abrasion
   filter(!is.na(name)) %>% 
-  filter(name!="0") 
+  filter(name!="0") %>% 
+  select(-c(shoe_id))
   
 step_calculations <- full_data_joined %>% 
   mutate("milesteps"= steps/2000) %>% 
