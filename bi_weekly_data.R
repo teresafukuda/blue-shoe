@@ -93,9 +93,7 @@ clean_shoe_ID <- shoe_id_table %>%
 
 wear_data_joined <- full_join(totals_biweekly,clean_shoe_ID)
 
-pre_data_joined <- full_join(wear_data_joined,clean_pre) %>% 
-  mutate(shoe_ID=gsub("-","",.$shoe_id)) %>% 
-  mutate(shoe_ID=gsub(" ","",.$shoe_ID)) 
+pre_data_joined <- full_join(wear_data_joined,clean_pre)
 #joins the step data, shoe ID, and pre survey data
 
 
@@ -136,8 +134,9 @@ mass_data_joined <- full_join(pre_data_joined,clean_mass)
 full_data_joined <- full_join(mass_data_joined, clean_shoedeets) %>%  #join all pre and post mass data, participant age/weight/name, shoe model/rubber/abrasion
   filter(!is.na(name)) %>% 
   filter(name!="0") %>% 
-  select(-c(shoe_id))
-  
+  select(-c('Shoe ID'))
+
+
 step_calculations <- full_data_joined %>% 
   mutate("milesteps"= steps/2000) %>% 
   mutate("g_per_milesteps"= grams_lost/milesteps) %>% 
