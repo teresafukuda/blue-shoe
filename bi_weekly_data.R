@@ -55,8 +55,9 @@ totals_biweekly <- clean_biweekly %>%
 clean_pre <- presurvey_data  %>%
   rename("name"= 'X1') %>% 
   clean_names(.) %>% 
-  mutate ("gait" = question_11) %>% 
-  select(name,age, weight, gait) %>% 
+  mutate ("gait" = question_11) %>%
+  mutate ("exercise"= question_1) %>% 
+  select(name,age, weight, gait, exercise) %>% 
   mutate_if(is.character, str_to_upper) # takes name, age, weight, and gait from pre-survey; makes data ALL CAPS
 
 # summarize pre survey data- gives us the demographics of the sample that we chose
@@ -64,7 +65,12 @@ pre_summary <- clean_pre %>%
   na.omit() %>% 
   summarize(min_age=min(age),
             max_age=max(age),
-            average_age=mean(age))
+            average_age=mean(age),
+            sd_age=sd(age),
+            min_weight=min(weight),
+            max_weight=max(weight),
+            average_weight=mean(weight),
+            sd_weight=sd(weight))
   
 
   
@@ -279,6 +285,9 @@ tread_initial <- tread_depth_raw %>%
   group_by(model, location) %>% 
   summarize("avg_depth"=mean(initial_mm
                              ))
+
+
+
 
 
 
