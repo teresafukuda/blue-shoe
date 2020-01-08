@@ -80,13 +80,10 @@ clean_shoe_ID <- shoe_id_table %>%
   clean_names(.) %>% 
   mutate (name=participant) %>% 
   mutate_if(is.character, str_to_upper) %>% 
-  select(shoe_id_left,shoe_id_right,model,name) %>% 
-  mutate(shoe_id_left=gsub("-","",.$shoe_id_left)) %>% 
-  mutate(shoe_id_right=gsub("-","",.$shoe_id_right)) %>%
-  mutate(shoe_id_left=gsub(" ","",.$shoe_id_left)) %>% 
-  mutate(shoe_id_right=gsub(" ","",.$shoe_id_right)) %>% 
-  gather("delete","shoe_ID", 1:2) %>% 
-  select (-c('delete'))
+  select(shoe_id,model,name) %>% 
+  mutate(shoe_ID=gsub("-","",.$shoe_id)) %>%
+  mutate(shoe_ID=gsub(" ","",.$shoe_ID)) %>%
+  select (-c('shoe_id'))
 
 
 
