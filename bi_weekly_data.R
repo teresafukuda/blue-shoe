@@ -115,9 +115,10 @@ clean_mass <- mass_data %>%
   mutate("prepost"= case_when(trial=="pre1"|trial=="pre2"|trial=="pre3"|trial=="pre4"|trial=="pre5" ~ "pre", TRUE~"post")) %>% 
   group_by(`Shoe ID`,`prepost`) %>% 
   mutate(mass= as.double(mass))  %>% 
+  filter(mass!='#DIV/0!') %>% 
   summarize("average"=mean(mass)) %>%  # averages of pre and post data for each shoe ID
   spread(.,prepost, average) %>% # separate pre and post columns
-  mutate("grams_lost"= pre-post) %>% 
+  mutate("mass_change"= post-pre) %>% 
   mutate("shoe_ID"= `Shoe ID`) %>% 
   select (-c('Shoe ID'))
 
@@ -139,9 +140,11 @@ full_data_joined <- full_join(mass_data_joined, clean_shoedeets) %>%  #join all 
 
 step_calculations <- full_data_joined %>% 
   mutate("milesteps"= steps/2000) %>% 
-  mutate("g_per_milesteps"= grams_lost/milesteps) %>% 
+  mutate("g_per_milesteps"= mass_change/milesteps) %>% 
   mutate("weight_kg"= weight*0.453592) %>% 
-  mutate("g_per_milesteps_per_kg"=g_per_milesteps/weight_kg)
+  mutate("g_per_milesteps_per_kg"=g_per_milesteps/weight_kg) %>% 
+  mutate("g_per_step"=mass_change/steps) %>% 
+  mutate("g_per_10kstep"=g_per_step*10000)
 
 #compare steps to miles and choose "best"?
 
@@ -163,7 +166,7 @@ steps_per_person
 ### grams loss per shoe for each style###
 
 #histogram of grams lost for all shoes - using total grams lost, not normalized by steps
-grams_per_shoe <- ggplot(step_calculations, aes(x=grams_lost))+
+grams_per_shoe <- ggplot(step_calculations, aes(x=mass_change))+
   geom_histogram()
 
 grams_per_shoe
