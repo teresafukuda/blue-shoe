@@ -211,7 +211,7 @@ grams_per_bodyweight_hardness
 
 
 
-#Part VIII. Statistical testing
+#Part VIII. Statistical testing ?
 
 # Hardness, abrasion, rubber type, geometry
 # Rate of shoe abrasion? g/km/kg/time across all shoes to see if it's linear relationship (time v. abrasion rate)
@@ -278,23 +278,61 @@ premass_error<- mass_data %>%
 # don't think this is incredibly valuable, just interesting
 
 
-# Part X. Considering Tread Depth
+# Part X. Tread Depth
 
 # clean up tread depth measurements: find average of the three measurements, summarize by model and location
 
 tread_initial <- tread_depth_raw_initial %>% 
   group_by(model, location) %>% 
-  summarize("avg_depth"=mean(initial_mm
+  summarize("initial_depth"=mean(initial_mm
                              ))
 
 
 tread_final <- tread_depth_raw_final %>% 
-  select(shoe_ID, side, location, final_mm) 
+  select(shoe_ID, side, model, location, final_mm) %>% 
+  mutate(final_mm_num= as.numeric(.$final_mm)) %>% 
+  group_by(shoe_ID, side, location, model) %>% 
+  summarize("final_depth"=mean(final_mm_num
+  ))
+  
+# join pre and post tread data
+tread_joined <- full_join(tread_initial, tread_final) %>% 
+  mutate(final_initial= final_depth-initial_depth)
 
-#not yet functional... 
+# group by shoe_ID, considering each ind shoe
+tread_joined_shoeID <- tread_joined %>% 
+  group_by(shoe_ID, model) %>% 
+  summarize("avg_depth_change"= mean(final_initial))
 
+# histogram of avg depth change for each shoe
+tread_change_hist <- ggplot(tread_joined_shoeID, aes(x=avg_depth_change))+
+  geom_histogram()
 
+tread_change_hist
 
+# scatter of avg depth change for each shoe, colored by shoe model
+tread_change_scatter <- ggplot(tread_joined_shoeID, aes(x=shoe_ID, y=avg_depth_change, color=model))+
+  geom_point()+
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))+
+  theme(legend.position = "none")
 
+tread_change_scatter
+
+# histogram of avg depth change for each shoe model
+tread_joined_model <- tread_joined %>% 
+  group_by(model) %>% 
+  summarize("avg_depth_change"= mean(final_initial))
+
+tread_model_hist <- ggplot(tread_joined_model, aes(x=avg_depth_change))+
+  geom_histogram()
+
+tread_model_hist
+
+#scatter of avg depth change for each shoe model
+tread_model_scatter <- ggplot(tread_joined_model, aes(x=model, y=avg_depth_change))+
+  geom_point()
+
+tread_model_scatter
 
 
