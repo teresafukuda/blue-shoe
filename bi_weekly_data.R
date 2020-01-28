@@ -167,8 +167,8 @@ steps_per_person
 
 ### grams loss per shoe for each style###
 
-#histogram of grams lost for all shoes - using total grams lost, not normalized by steps
-grams_per_shoe <- ggplot(step_calculations, aes(x=mass_change))+
+#histogram of grams lost for all shoes - using total grams lost, not normalized by steps; fill= variables
+grams_per_shoe <- ggplot(step_calculations, aes(x=mass_change, fill=geometry))+
   geom_histogram()
 
 grams_per_shoe
