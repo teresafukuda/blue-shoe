@@ -20,7 +20,7 @@ library(lubridate) # load lubridate to work with dates and times
 
 biweeklydata <- read_csv("Bi-Weekly Wear Test Form FINAL.csv") # edit file name to match the downloaded file, updated 1/6
 
-shoe_id_table <- read_csv("ShoeID_data_forR - EDITED 1_6.csv") # table from google sheets of all participants and their shoe models and ID, updated 1/6
+shoe_id_table <- read_csv("ShoeID_data_forR - EDITED 1_30.csv") # table from google sheets of all participants and their shoe models and ID, updated 1/6
 
 presurvey_data <- read_csv("Pre Survey Data - Sheet1.csv") #all the presurvey data, updated 12/3
 
@@ -165,11 +165,17 @@ steps_per_person <- ggplot(full_data_joined, aes(x=name, y=steps/1000)) +
 
 steps_per_person
 
+steps_per_person_hist <- ggplot (full_data_joined, aes(x=steps)) +
+  geom_histogram()
+  
+steps_per_person_hist
+
 ### grams loss per shoe for each style###
 
 #histogram of grams lost for all shoes - using total grams lost, not normalized by steps; fill= variables
-grams_per_shoe <- ggplot(step_calculations, aes(x=mass_change, fill=geometry))+
-  geom_histogram()
+grams_per_shoe <- ggplot(step_calculations, aes(x=mass_change))+
+  geom_histogram()+
+  facet_wrap(~geometry)
 
 grams_per_shoe
 
@@ -188,22 +194,23 @@ grams_per_shoe
 
 ### overall loss per km ####
 #histogram of grams/km for all shoes
-grams_per_shoe <- ggplot(step_calculations, aes(x=g_per_km))+
+grams_per_shoe <- ggplot(step_calculations, aes(x=g_per_milesteps))+
   geom_histogram()
 grams_per_shoe
 ### loss per km per kg body weight ####
 
 #histogram of grams/km/kg weight for all shoes
-grams_per_bodyweight <- ggplot(step_calculations, aes(x=g_per_km_per_kg))+
+grams_per_bodyweight <- ggplot(step_calculations, aes(x=g_per_milesteps_per_kg))+
   geom_histogram()
 grams_per_bodyweight
 ### loss per km per kg body weight by abrasion rating ###
-grams_per_bodyweight_abrasion <- ggplot(step_calculations, aes(x=g_per_km_per_kg))+
+grams_per_bodyweight_abrasion <- ggplot(step_calculations, aes(x=g_per_milesteps_per_kg))+
   geom_histogram()+
   facet_wrap(~abrasion)
 grams_per_bodyweight_abrasion
+
 ### loss per km per kg body weight by hardness rating ###
-grams_per_bodyweight_hardness <- ggplot(step_calculations, aes(x=g_per_km_per_kg))+
+grams_per_bodyweight_hardness <- ggplot(step_calculations, aes(x=g_per_milesteps_per_kg))+
   geom_histogram()+
   facet_wrap(~hardness)
 grams_per_bodyweight_hardness
@@ -234,13 +241,13 @@ summary_model <- full_data_joined %>%
 # Using the washing test data from the 6 sample shoes to find the error in the calculations-- how much of the change of mass might be due to washing?
 
 #creates a df with the averages of pre and post washing weights, and the difference (post-pre)
-washing_error <- washing_test %>% 
-  gather ("trial","mass",2:11) %>% 
-  mutate("prepost"= case_when(trial=="initial1"|trial=="initial2"|trial=="initial3"|trial=="initial4"|trial=="initial5" ~ "pre", TRUE~"post")) %>% 
-  group_by(shoe_ID,prepost) %>% 
-  summarize(average=mean(mass)) %>% 
-  spread(.,prepost, average) %>% # separate pre and post columns
-  mutate("change_post_to_pre"= post-pre)
+# washing_error <- washing_test %>% 
+#   gather ("trial","mass",2:11) %>% 
+#   mutate("prepost"= case_when(trial=="initial1"|trial=="initial2"|trial=="initial3"|trial=="initial4"|trial=="initial5" ~ "pre", TRUE~"post")) %>% 
+#   group_by(shoe_ID,prepost) %>% 
+#   summarize(average=mean(mass)) %>% 
+#   spread(.,prepost, average) %>% # separate pre and post columns
+#   mutate("change_post_to_pre"= post-pre)
 
 
 
@@ -302,11 +309,19 @@ tread_joined <- full_join(tread_initial, tread_final) %>%
 # group by shoe_ID, considering each ind shoe
 tread_joined_shoeID <- tread_joined %>% 
   group_by(shoe_ID, model) %>% 
-  summarize("avg_depth_change"= mean(final_initial))
+  summarize("avg_depth_change"= mean(final_initial)) 
+
+tread_joined_details<- tread_joined_shoeID %>% 
+  clean_names(.) %>% 
+  ungroup() %>% 
+  mutate("shoe_ID"=shoe_id) %>% 
+  mutate_if(is.character, str_to_upper) %>% 
+  full_join(.,clean_shoedeets)
 
 # histogram of avg depth change for each shoe
-tread_change_hist <- ggplot(tread_joined_shoeID, aes(x=avg_depth_change))+
-  geom_histogram()
+tread_change_hist <- ggplot(tread_joined_details, aes(x=avg_depth_change))+
+  geom_histogram()+
+  facet_wrap(~geometry)
 
 tread_change_hist
 
@@ -329,10 +344,10 @@ tread_model_hist <- ggplot(tread_joined_model, aes(x=avg_depth_change))+
 
 tread_model_hist
 
-#scatter of avg depth change for each shoe model
-tread_model_scatter <- ggplot(tread_joined_model, aes(x=model, y=avg_depth_change))+
-  geom_point()
+#hist of avg depth change for each shoe model
+tread_model_hist <- ggplot(tread_joined_shoeID, aes(x=avg_depth_change))+
+  geom_histogram(aes(fill=model))
 
-tread_model_scatter
+tread_model_hist
 
 
