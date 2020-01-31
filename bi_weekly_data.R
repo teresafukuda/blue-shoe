@@ -15,6 +15,8 @@
 library(tidyverse) # hello tidyverse
 library(janitor) # load janitor to clean up dataframe
 library(lubridate) # load lubridate to work with dates and times
+library(ggthemes) # ggplot themes
+
 
 # I made this so that you can download the data from the Google Drive as a csv and import directly into here, no edits
 
@@ -30,9 +32,9 @@ shoe_deets <- read_csv("ShoeID_data_forR - Shoe Model Names HERE.csv") # sheet 2
 
 washing_test <- read_csv("WashingTestError - Sheet1.csv") # washing test pre and post measurements
 
-tread_depth_raw_initial <- read_csv("Shoe Depth Measurements - initial_control.csv")
+tread_depth_raw_initial <- read_csv("Shoe Depth Measurements - initial_control (1).csv")
 
-tread_depth_raw_final <- read_csv("Shoe Depth Measurements - wear_shoes (1).csv")
+tread_depth_raw_final <- read_csv("Shoe Depth Measurements - wear_shoes (2).csv")
 
 # Part II. Clean up the biweekly data, presurvey data and summarize into totals by name of user
 
@@ -317,21 +319,30 @@ tread_joined_details<- tread_joined_shoeID %>%
   ungroup() %>% 
   mutate("shoe_ID"=shoe_id) %>% 
   mutate_if(is.character, str_to_upper) %>% 
-  full_join(.,clean_shoedeets)
+  full_join(.,clean_shoedeets) %>% 
+  drop_na()
 
 # histogram of avg depth change for each shoe
 tread_change_hist <- ggplot(tread_joined_details, aes(x=avg_depth_change))+
   geom_histogram()+
-  facet_wrap(~geometry)
+  theme_bw()+
+  geom_vline(xintercept=c(0), color="blue")+
+  theme_economist()+scale_colour_economist()
 
 tread_change_hist
 
 # scatter of avg depth change for each shoe, colored by shoe model
-tread_change_scatter <- ggplot(tread_joined_shoeID, aes(x=shoe_ID, y=avg_depth_change, color=model))+
-  geom_point()+
+tread_change_scatter <- tread_joined_shoeID %>% 
+  arrange(avg_depth_change) %>% 
+  ungroup() %>% 
+  mutate(shoe_ID=factor(shoe_ID, levels=shoe_ID)) %>% 
+  ggplot(., aes(x=shoe_ID, y=avg_depth_change))+
+  geom_point(aes(color="blue"))+
   theme_classic()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1))+
-  theme(legend.position = "none")
+  theme(legend.position = "none")+
+  geom_point(data=tread_error, aes(x=shoe_ID, y=avg_depth_change))+
+  geom_hline(yintercept=c(0), color="blue")
 
 tread_change_scatter
 
@@ -340,10 +351,15 @@ tread_joined_model <- tread_joined %>%
   group_by(model) %>% 
   summarize("avg_depth_change"= mean(final_initial))
 
-tread_model_hist <- ggplot(tread_joined_model, aes(x=avg_depth_change))+
-  geom_histogram()
-
-tread_model_hist
+tread_model_scatter <- tread_joined_model %>% 
+  arrange(avg_depth_change) %>% 
+  mutate(model=factor(model, levels=model)) %>% 
+  ggplot(., aes(x=model, y=avg_depth_change))+
+  geom_point()+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 75, hjust=1))
+  
+tread_model_scatter
 
 #hist of avg depth change for each shoe model
 tread_model_hist <- ggplot(tread_joined_shoeID, aes(x=avg_depth_change))+
@@ -353,6 +369,19 @@ tread_model_hist
 
 tread_error <- tread_joined_details %>%
   full_join(.,clean_shoe_ID) %>% 
-  filter(name=="CONTROL")
+  filter(name=="CONTROL") %>% 
+  drop_na()
   
+tread_hist_final <- ggplot()
 
+tread_by_location <- tread_joined %>% 
+  group_by(location) %>% 
+  drop_na() %>% 
+  summarize("avg_depth_change"=mean(final_initial)) %>% 
+  ungroup() %>% 
+  mutate(location=fct_relevel(location, "heel", "outer_arch","ball","tip")) %>% 
+  ggplot(.,aes(x=location, y=avg_depth_change))+
+  geom_point()+
+  theme_bw()
+
+tread_by_location
