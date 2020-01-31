@@ -1,0 +1,15 @@
+Model,hardness,abrasion,rubber content label,rubber_type,geometry,color,,,
+,,,,,,,,,
+adidas F/22 Prime Knit,60A,200,,natural,hybrid,white,,,
+Reebok Endless Run,60A,80,,synthetic,running,black,,Identification Table,
+Adidas ultraBOOST Parley black,60A,80,so rerub nm,synthetic,running,black,,Sign,Meaning
+Adidas ultraBOOST Parley white,60A,200,so NR 100 nm,natural,running,white,,60A/50A,rubber hardness
+Adidas Astrarun (60A),60A,200,,synthetic,running,black,CHECK THIS ONE,80/100/200,Abrasion Rating
+Parley Prime LTD ADIZERO white,60A,200,100% rubber 50 rerub NR NM,natural,running,white,,NR,Natural Rubber
+Parley Prime LTD ADIZERO black,60A,80,100% rubber 50 rerub NR NM,natural,running,black,,100 NM,Size of rubber Particles used in production
+Ultra Boost Stella,60A,200,rerub 10% 40 nm epm5,synthetic,running,black,recycled = natural with 10% recycled synthetic,Rerub 10%,% of material made from recycled rubber
+Adidas Nizza(50A syn) white,50A,80,SO NM,synthetic,lifestyle,white,,EPM ,Environmentally preferred Material
+Adidas Nizza(60A) black,60A,80,SO NM,synthetic,lifestyle,tan,,SO NM,
+Adidas Terrex Boat,60A,200,,natural,lifestyle,tan,,,
+Adidas Ultratech,60A,80,,synthetic,hybrid,black,,,
+Reebok Bolton,50A,80,,synthetic,hybrid,black,,,

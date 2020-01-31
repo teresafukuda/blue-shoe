@@ -26,7 +26,7 @@ presurvey_data <- read_csv("Pre Survey Data - Sheet1.csv") #all the presurvey da
 
 mass_data <- read_csv("Shoe_mass_forR - Sheet1 (1).csv") #this has the shoe weight data for before and after testing in grams
 
-shoe_deets <- read_csv("ShoeID_data_forR - Sheet2.csv") # sheet 2 in the google sheet has the shoe details about rubber, abrasion, etc.
+shoe_deets <- read_csv("ShoeID_data_forR - Shoe Model Names HERE.csv") # sheet 2 in the google sheet has the shoe details about rubber, abrasion, etc.
 
 washing_test <- read_csv("WashingTestError - Sheet1.csv") # washing test pre and post measurements
 
@@ -308,6 +308,7 @@ tread_joined <- full_join(tread_initial, tread_final) %>%
 
 # group by shoe_ID, considering each ind shoe
 tread_joined_shoeID <- tread_joined %>% 
+  drop_na() %>% 
   group_by(shoe_ID, model) %>% 
   summarize("avg_depth_change"= mean(final_initial)) 
 
@@ -350,4 +351,8 @@ tread_model_hist <- ggplot(tread_joined_shoeID, aes(x=avg_depth_change))+
 
 tread_model_hist
 
+tread_error <- tread_joined_details %>%
+  full_join(.,clean_shoe_ID) %>% 
+  filter(name=="CONTROL")
+  
 
