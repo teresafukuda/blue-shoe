@@ -160,15 +160,25 @@ step_calculations <- full_data_joined %>%
 #age_vis <- ggplot(clean_pre, aes(x=age)) + 
 #geom_histogram()
 
-# steps per person - shows steps per person (thousand steps)
-steps_per_person <- ggplot(full_data_joined, aes(x=name, y=steps/1000)) +
+# steps per person - shows steps per person 
+steps_per_person <- full_data_joined %>% 
+  group_by(name) %>% 
+  summarize("steps"=mean(steps)) %>% 
+  arrange(steps) %>% 
+  mutate(name=factor(name, levels=name)) %>% 
+  ggplot(., aes(x=name, y=steps)) +
   geom_point()+
-  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))+
+  geom_hline(yintercept=c(250000), color="blue")
+
+
 
 steps_per_person
 
 steps_per_person_hist <- ggplot (full_data_joined, aes(x=steps)) +
-  geom_histogram()
+  geom_histogram()+
+  theme_bw()
   
 steps_per_person_hist
 
