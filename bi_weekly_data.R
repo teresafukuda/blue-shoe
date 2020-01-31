@@ -185,11 +185,14 @@ steps_per_person_hist
 ### grams loss per shoe for each style###
 
 #histogram of grams lost for all shoes - using total grams lost, not normalized by steps; fill= variables
-grams_per_shoe <- ggplot(step_calculations, aes(x=mass_change))+
+grams_per_shoe_hist <- ggplot(step_calculations, aes(x=mass_change))+
   geom_histogram()+
-  facet_wrap(~geometry)
+  scale_x_continuous()+
+  scale_y_continuous()+
+  geom_vline(xintercept=c(0), color="blue")+
+  theme_bw()
 
-grams_per_shoe
+grams_per_shoe_hist
 
 
 # #histogram of grams/km broken up by style-- not particularly useful because of so few data points per style
@@ -206,15 +209,29 @@ grams_per_shoe
 
 ### overall loss per km ####
 #histogram of grams/km for all shoes
-grams_per_shoe <- ggplot(step_calculations, aes(x=g_per_milesteps))+
-  geom_histogram()
-grams_per_shoe
+grams_per_shoe_mile <- ggplot(step_calculations, aes(x=g_per_milesteps))+
+  geom_histogram()+
+  theme_bw()
+
+
+grams_per_shoe_mile
+
+grams_per_shoe_mile_point <- ggplot(step_calculations, aes(x=rubber_type, y=g_per_milesteps))+
+  geom_point()+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 75, hjust=1))
+
+
+grams_per_shoe_mile_point
+
 ### loss per km per kg body weight ####
 
 #histogram of grams/km/kg weight for all shoes
 grams_per_bodyweight <- ggplot(step_calculations, aes(x=g_per_milesteps_per_kg))+
-  geom_histogram()
+  geom_histogram()+
+  theme_bw()
 grams_per_bodyweight
+
 ### loss per km per kg body weight by abrasion rating ###
 grams_per_bodyweight_abrasion <- ggplot(step_calculations, aes(x=g_per_milesteps_per_kg))+
   geom_histogram()+
@@ -228,6 +245,23 @@ grams_per_bodyweight_hardness <- ggplot(step_calculations, aes(x=g_per_milesteps
 grams_per_bodyweight_hardness
 
 
+# grams versus steps
+
+grams_steps_scatter <- ggplot(full_data_joined, aes(x=steps, y=mass_change))+
+                                geom_point()+
+                                theme_bw()
+
+grams_steps_scatter
+
+##### mass error ######
+# gives change in measurements for the control shoes-- min value is the largest loss, max value is the largest gain, all taken per shoes model
+
+mass_error<- full_data_joined %>% 
+  filter(name=="CONTROL") %>% 
+  group_by(model) %>% 
+  summarize(min_value=min(mass_change),
+            max_value=max(mass_change),
+            avg=mean(mass_change))
 
 
 #Part VIII. Statistical testing ?
@@ -382,7 +416,7 @@ tread_error <- tread_joined_details %>%
   filter(name=="CONTROL") %>% 
   drop_na()
   
-tread_hist_final <- ggplot()
+# tread_hist_final <- ggplot()
 
 tread_by_location <- tread_joined %>% 
   group_by(location) %>% 
