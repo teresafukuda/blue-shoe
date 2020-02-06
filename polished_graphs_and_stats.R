@@ -53,3 +53,38 @@ mass_vs_tread
 
 # Ran a regression between mass lost and tread depth change, P value is absurdly high (.971). 
 
+################### Graphs of tread depth change vs. different variables ################
+
+### Normalize tread depth by steps taken ###
+
+tread_calculations <- tread_mass_joined %>% 
+  mutate("mm_per_mile"= avg_depth_change/miles) %>% 
+  mutate("weight_kg"= weight*0.453592) %>% 
+  mutate("mm_per_miles_per_kg"=mm_per_mile/weight_kg)
+
+# Tread depth vs rubber type
+
+tread_change_vs_rubber <- ggplot(tread_calculations, aes(x=rubber_type, y=mm_per_mile))+
+  geom_point()+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 75, hjust=1))
+
+tread_change_vs_rubber
+
+# Tread depth vs hardness
+
+tread_change_vs_hardness <- ggplot(tread_calculations, aes(x=hardness, y=mm_per_mile))+
+  geom_point()+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 75, hjust=1))
+
+tread_change_vs_hardness
+
+# Tread depth vs geometry
+
+tread_change_vs_geometry <- ggplot(tread_calculations, aes(x=geometry, y=mm_per_mile))+
+  geom_point()+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 75, hjust=1))
+
+tread_change_vs_geometry
