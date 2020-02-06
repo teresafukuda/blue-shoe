@@ -111,9 +111,13 @@ mean(massloss_4Q$grams_per_mile, na.rm = TRUE) #-0.01043119
 
 # Top 10
 
+# Order and select participants with top 10 in miles walked
+
 top10miles <- full_data_joined[with(full_data_joined,order(-steps)),]
 
 top10miles2 <- top10miles[1:10,]
+
+# Calculate mass change per mile
 
 massloss_top10 <- top10miles2 %>% 
   mutate(grams_per_mile=mass_change/miles)
@@ -122,12 +126,16 @@ mean(massloss_top10$grams_per_mile, na.rm = TRUE) # mean is -0.0062230421
 
 # Bottom 10
 
+# Order and select participants with top 10 in miles walked. Remove participants that didn't walk at all
+
 bottom10miles <- full_data_joined %>% 
   filter(miles != 0) 
 
 bottom10miles2 <- bottom10miles[with(bottom10miles,order(steps)),] 
 
 bottom10miles3 <- bottom10miles2[1:10,]
+
+# Calculate mass change per mile
 
 massloss_bottom10 <- bottom10miles3 %>% 
   mutate(grams_per_mile=mass_change/miles)
