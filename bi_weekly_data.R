@@ -139,8 +139,14 @@ mass_data_joined <- full_join(pre_data_joined,clean_mass)
 full_data_joined <- full_join(mass_data_joined, clean_shoedeets) %>%  #join all pre and post mass data, participant age/weight/name, shoe model/rubber/abrasion
   filter(!is.na(name)) %>% 
   filter(name!="0") %>% 
-  select(-c('Shoe ID'))
-
+  select(-c('Shoe ID')) %>% 
+  filter(name != "BRI WINKLER") %>% 
+  filter(name != "THOMAS BUTERA") %>% 
+  filter(name != "TIMMY HYUNH") %>% 
+  filter(name != "CURTIS BAUMANN") %>%
+  filter(name != "SHIVA HASSON") %>%
+  filter(name != "GARY FOX") %>% 
+  filter(name != "LINDA HUYNH")
 
 step_calculations <- full_data_joined %>% 
   mutate("milesteps"= steps/2000) %>% 
