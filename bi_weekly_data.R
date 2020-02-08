@@ -377,7 +377,8 @@ tread_joined <- full_join(tread_initial, tread_final) %>%
 tread_joined_shoeID <- tread_joined %>% 
   drop_na() %>% 
   group_by(shoe_ID, model) %>% 
-  summarize("avg_depth_change"= mean(final_initial)) 
+  summarize("avg_depth_change"= mean(final_initial),
+            "avg_mass_change"=mean(tread_mass)) 
 
 tread_joined_details<- tread_joined_shoeID %>% 
   clean_names(.) %>% 
