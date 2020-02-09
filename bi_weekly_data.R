@@ -34,7 +34,7 @@ washing_test <- read_csv("WashingTestError - Sheet1.csv") # washing test pre and
 
 tread_depth_raw_initial <- read_csv("Shoe Depth Measurements - initial_control (1).csv")
 
-tread_depth_raw_final <- read_csv("Shoe Depth Measurements - wear_shoes (2).csv")
+tread_depth_raw_final <- read_csv("Shoe Depth Measurements - wear_shoes_final.csv") #updated with newest dataset 2/8/20 AC
 
 lab_abrasion_raw <- read_csv("Lab Abrasion Data - Sheet1 (1).csv")
 
