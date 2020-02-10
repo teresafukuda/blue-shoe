@@ -148,7 +148,8 @@ full_data_joined <- full_join(mass_data_joined, clean_shoedeets) %>%  #join all 
   filter(name != "CURTIS BAUMANN") %>%
   filter(name != "SHIVA HASSON") %>%
   filter(name != "GARY FOX") %>% 
-  filter(name != "LINDA HUYNH")
+  filter(name != "LINDA HUYNH") %>% 
+  mutate("measuremass_lost_per_mile"= mass_change/`steps to miles`) 
 
 step_calculations <- full_data_joined %>% 
   mutate("milesteps"= steps/2000) %>% 

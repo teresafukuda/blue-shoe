@@ -18,8 +18,10 @@ full_data_joined_tread <- full_join(full_data_joined, tread_mass_average)
 #create a data frame that includes normalized mass loss
 
 full_data_joined_tread_norm <- full_data_joined_tread %>% 
-  mutate("mass_lost_per_mile"= average_tread_mass/`steps to miles`) %>% 
+  mutate("tread_mass_lost_per_mile"= average_tread_mass/`steps to miles`) %>% 
   drop_na(mass_lost_per_mile)
+
+full_data_joined_tread_norm
 
 
 
@@ -89,3 +91,48 @@ treadmasslost_model <- ggplot(full_data_joined_tread_norm, aes(x = model, y = ma
                      #values=c("dark green","light blue"))+
 
 treadmasslost_model
+
+
+
+
+##################Calculating some averages for the slides########################
+#mean
+
+mean_average_tread_mass_change <- mean(full_data_joined_tread_norm$average_tread_mass, na.rm = TRUE)
+mean_average_tread_mass_change
+#-1.841239
+
+mean_average_tread_mass_changenorm <- mean(full_data_joined_tread_norm$mass_lost_per_mile, na.rm = TRUE)
+mean_average_tread_mass_changenorm
+#-0.03541883
+
+
+#############Calculating measurement error for tread depth measurements#############
+tread_depth_measureerror <- tread_depth_raw_initial %>% 
+  mutate("measurement_difference"= final_mm-initial_mm) %>% 
+  group_by(shoe_ID,model,side,location) %>% 
+  summarize(
+      average_measurement_difference=mean(measurement_difference)
+    ) %>% 
+  drop_na()
+
+abs(tread_depth_measureerror$average_measurement_difference) #abslute value of the differences 
+#the mean of these abolute values is 0.238645833
+
+
+
+##############Boxplot of mass_changed per mile###################
+
+tread_mass_norm_boxplot <- ggplot(full_data_joined_tread_norm, aes(y=mass_lost_per_mile))+
+  geom_boxplot()+
+  ylim(-0.8,.4)+
+  theme_bw()
+
+tread_mass_norm_boxplot
+
+measured_mass_norm_boxplot <- ggplot(full_data_joined, aes(y=measuremass_lost_per_mile))+
+  geom_boxplot()+ 
+  ylim(-0.8,.4)+
+  theme_bw()
+
+measured_mass_norm_boxplot
