@@ -34,14 +34,15 @@ treadmass_miles_lm_graph<- ggplot(full_data_joined_tread, aes(x=`steps to miles`
   ylim(-8,4)+
   xlim(NA, 600)+
   theme_bw()+
-  labs(x = "Distance Travelled (Miles)", y = "Mass Lost (g)")+
+  labs(x = "Distance Travelled (Miles)", y = "Mass Change (g)")+
   geom_smooth(method = "lm", color = "indianred1")+ # add se = FALSE to remove error bar
   geom_hline(yintercept=c(0), color="blue")
 treadmass_miles_lm_graph
 
 
 
-######################## Updating mass change by tread  vs variables ############################
+
+######################## Updating mass change by tread NORMALIZED  vs variables ############################
 
 # Wrangling to remove high ourliers, -Inf values, NA shoe types
 
@@ -76,12 +77,13 @@ treadmass_vs_geometry <- ggplot(full_data_joined_tread_norm, aes(x=geometry, y=m
 treadmass_vs_geometry
 
 
-#tread mass lost based on shoe model
+#tread mass normalized lost based on shoe model
 treadmasslost_model <- ggplot(full_data_joined_tread_norm, aes(x = model, y = mass_lost_per_mile)) +
-  geom_point(aes(color = model,
-                  pch = model)) +
+  geom_boxplot() +
   ylim(-0.51,.4)+
-  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust=1))+
+  labs(x = "", y = "Mass Change per Mile (g)")
+  
   scale_shape_manual(values=seq(0,15)) #need more shapes
   #scale_color_manual(name="Sex",
                      #values=c("dark green","light blue"))+
