@@ -82,14 +82,14 @@ treadmass_vs_geometry
 #tread mass normalized lost based on shoe model
 treadmasslost_model <- ggplot(full_data_joined_tread_norm, aes(x = model, y = mass_lost_per_mile)) +
   geom_boxplot() +
+  theme_bw() +
   ylim(-0.51,.4)+
-  theme(axis.text.x = element_text(angle = 45, hjust=1))+
+  theme(axis.text.x = element_text(angle = 45, hjust=1, size=12))+
+  theme(axis.text.y = element_text(size = 12))+
+  theme(axis.title.y = element_text(size = 12))+
   labs(x = "", y = "Mass Change per Mile (g)")
   
-  scale_shape_manual(values=seq(0,15)) #need more shapes
-  #scale_color_manual(name="Sex",
-                     #values=c("dark green","light blue"))+
-
+  
 treadmasslost_model
 
 
@@ -136,3 +136,9 @@ measured_mass_norm_boxplot <- ggplot(full_data_joined, aes(y=measuremass_lost_pe
   theme_bw()
 
 measured_mass_norm_boxplot
+
+
+
+###### find the median and mean of average tread mass lost #######
+median(full_data_joined_tread_norm$mass_lost_per_mile, na.rm = TRUE)
+mean(full_data_joined_tread_norm$mass_lost_per_mile, na.rm = TRUE)
