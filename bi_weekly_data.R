@@ -34,7 +34,9 @@ washing_test <- read_csv("WashingTestError - Sheet1.csv") # washing test pre and
 
 tread_depth_raw_initial <- read_csv("Shoe Depth Measurements - initial_control (1).csv")
 
-tread_depth_raw_final <- read_csv("Shoe Depth Measurements - wear_shoes (2).csv")
+tread_depth_raw_final <- read_csv("Shoe Depth Measurements - wear_shoes_final.csv") #updated with newest dataset 2/8/20 AC
+
+lab_abrasion_raw <- read_csv("Lab Abrasion Data - Sheet1 (1).csv")
 
 # Part II. Clean up the biweekly data, presurvey data and summarize into totals by name of user
 
@@ -139,8 +141,15 @@ mass_data_joined <- full_join(pre_data_joined,clean_mass)
 full_data_joined <- full_join(mass_data_joined, clean_shoedeets) %>%  #join all pre and post mass data, participant age/weight/name, shoe model/rubber/abrasion
   filter(!is.na(name)) %>% 
   filter(name!="0") %>% 
-  select(-c('Shoe ID'))
-
+  select(-c('Shoe ID')) %>% 
+  filter(name != "BRI WINKLER") %>% 
+  filter(name != "THOMAS BUTERA") %>% 
+  filter(name != "TIMMY HYUNH") %>% 
+  filter(name != "CURTIS BAUMANN") %>%
+  filter(name != "SHIVA HASSON") %>%
+  filter(name != "GARY FOX") %>% 
+  filter(name != "LINDA HUYNH") %>% 
+  mutate("measuremass_lost_per_mile"= mass_change/`steps to miles`) 
 
 step_calculations <- full_data_joined %>% 
   mutate("milesteps"= steps/2000) %>% 
@@ -336,27 +345,41 @@ premass_error<- mass_data %>%
 # clean up tread depth measurements: find average of the three measurements, summarize by model and location
 
 tread_initial <- tread_depth_raw_initial %>% 
+  clean_names(.)  %>%
+  mutate_if(is.character, str_to_upper) %>% 
   group_by(model, location) %>% 
   summarize("initial_depth"=mean(initial_mm
                              ))
 
 
 tread_final <- tread_depth_raw_final %>% 
+  mutate_if(is.character, str_to_upper) %>% 
   select(shoe_ID, side, model, location, final_mm) %>% 
   mutate(final_mm_num= as.numeric(.$final_mm)) %>% 
   group_by(shoe_ID, side, location, model) %>% 
   summarize("final_depth"=mean(final_mm_num
   ))
-  
+
+## clean up abrasion data
+
+clean_abrasion <- lab_abrasion_raw %>% 
+  clean_names(.)  %>%
+  mutate_if(is.character, str_to_upper) %>% # make all character labels uppercase
+  mutate("model"=model_name)
+
+
 # join pre and post tread data
 tread_joined <- full_join(tread_initial, tread_final) %>% 
-  mutate(final_initial= final_depth-initial_depth)
+  mutate(final_initial= final_depth-initial_depth) %>% 
+  full_join (.,clean_abrasion) %>% 
+  mutate("tread_mass"=final_initial*0.1*specific_gravity*shoe_sa_cm2)
 
 # group by shoe_ID, considering each ind shoe
 tread_joined_shoeID <- tread_joined %>% 
   drop_na() %>% 
   group_by(shoe_ID, model) %>% 
-  summarize("avg_depth_change"= mean(final_initial)) 
+  summarize("avg_depth_change"= mean(final_initial),
+            "avg_mass_change"=mean(tread_mass)) 
 
 tread_joined_details<- tread_joined_shoeID %>% 
   clean_names(.) %>% 
