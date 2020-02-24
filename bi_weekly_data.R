@@ -418,6 +418,8 @@ tread_error <- tread_joined_details %>%
   
 # tread_hist_final <- ggplot()
 
+
+
 tread_by_location <- tread_joined %>% 
   group_by(location) %>% 
   drop_na() %>% 
@@ -426,7 +428,11 @@ tread_by_location <- tread_joined %>%
   mutate(location=fct_relevel(location, "heel", "outer_arch","ball","tip")) %>% 
   ggplot(.,aes(x=location, y=avg_depth_change))+
   geom_point()+
-  theme_bw()
+  theme_bw()+
+  labs(title = "Mean Depth Change by Sole Location", y = "Mean Depth Change (g)", x = "Sole Location")+
+  scale_y_continuous(limits = c(-0.4, 0), expand = c(0,0))
+
+# heel = 1, outer arch = 2, ball = 3, tip = 4
 
 tread_by_location
 

@@ -141,3 +141,15 @@ massloss_bottom10 <- bottom10miles3 %>%
   mutate(grams_per_mile=mass_change/miles)
 
 mean(massloss_bottom10$grams_per_mile, na.rm = TRUE) # mean is -0.2153816
+
+#### Making a graph of this data ####
+
+mass_change <- read_csv("rates_of_mass_loss.csv")
+
+mass_change$interval <- factor(mass_change$interval, levels = mass_change$interval[order(mass_change$mass_change_per_mile)])
+
+mass_change_plot <- ggplot(mass_change, aes(x=interval, y=mass_change_per_mile))+
+  geom_point()+
+  theme_bw()+
+  labs(title = "Rate of Mass Change with Increasing Wear", x = "Interval of Wear", y = "Average Mass Lost per Mile (g)")
+mass_change_plot
