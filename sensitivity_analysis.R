@@ -33,6 +33,6 @@ summary_tread_error <- new_tread_mass %>%
 
 sensitivity_simluation_output <- matrix(0, nrow=36, ncol=500)
 
-for (i in (1:500)) {
-    sensitivity_simluation_output[[i]]<- summary_tread_error$avg_depth_change 
-}
+# for (i in (1:500)) {
+#    sensitivity_simluation_output[[i]]<- summary_tread_error$avg_depth_change 
+# }
