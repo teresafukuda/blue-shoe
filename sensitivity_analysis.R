@@ -1,6 +1,6 @@
 ####################################################################
 #
-# Attempt at a sensitivity analysis for weights and for tread derived mass
+# Attempt at a endpoint monte carlo simulation for weights and for tread derived mass
 #
 # by Teresa Fukuda
 # for the Future Footwear Project
@@ -44,8 +44,10 @@ sensitivity_simluation_output <- as.data.frame(matrix(0,nrow=9,ncol=500))
 sensitivity_simluation_output[[1]]<- as.data.frame(summary_tread_error$avg_depth_change)
 
 ########## HERE BEGINS THE MONTE CARLO SIMULATION FOR REAL ###################
+sensitivity_simluation_output <- as.data.frame(matrix(0,nrow=9,ncol=1000))
+
 # run monte carlo simluation 500 times for randomly + or - the error per model 
- for (i in (1:500)) {
+ for (i in (1:1000)) {
    random_vector <- runif(549)
    
    new_tread_mass <- tread_joined %>% 
@@ -70,7 +72,7 @@ sensitivity_simluation_output[[1]]<- as.data.frame(summary_tread_error$avg_depth
 sensitivity_simluation_output_clean <- sensitivity_simluation_output %>%
   mutate ("model"=summary_tread_error$model) %>% 
   select(model,everything()) %>% 
-  gather(simulation, tread_mass, V1:V500) %>% 
+  gather(simulation, tread_mass, V1:V1000) %>% 
   group_by(model) %>% 
   summarize("min"=min(tread_mass),
             "max"=max(tread_mass),
@@ -89,10 +91,10 @@ control_mass <- full_data_joined %>%
   summarize("avg_error"= mean(mass_change))
 
 # now do the same thing but with the mass data
-sensitivity_mass_simluation_output <- as.data.frame(matrix(0,nrow=13,ncol=500))
+sensitivity_mass_simluation_output <- as.data.frame(matrix(0,nrow=13,ncol=1000))
 
 
-for (i in (1:500)) {
+for (i in (1:1000)) {
   random_vector <- runif(133)
   
   new_shoe_mass <- full_data_joined %>% 
@@ -110,13 +112,13 @@ for (i in (1:500)) {
   sensitivity_mass_simluation_output[[i]]<- summary_mass_error$avg_mass_change 
 }
 
-#output gives 500 columns, each is a simulation with each row being a different model, consistent with the model names in summary_tread_error
+#output gives 1000 columns, each is a simulation with each row being a different model, consistent with the model names in summary_tread_error
 
 # create a df with the min, max, and mean values for each model tread_mass change based on the values calculated from the control shoes as our error (randomly + or -)
 sensitivity_mass_simluation_output_clean <- sensitivity_mass_simluation_output %>%
   mutate ("model"=summary_mass_error$model) %>% 
   select(model,everything()) %>% 
-  gather(simulation, tread_mass, V1:V500) %>% 
+  gather(simulation, tread_mass, V1:V1000) %>% 
   group_by(model) %>% 
   summarize("min"=min(tread_mass),
             "max"=max(tread_mass),
