@@ -3,7 +3,7 @@ name,Shoe ID Number,Age,Weight,Question 1,Question 2,Question 3,Question 4,Quest
 Stacey Cheung,1,29,127,6 to 7,hybrid,3,comfort,,no,3 to 5,7 to 10,75,0,0,20,5,18+,heel,I often run when it is not sunny,somewhat agree,strongly agree,somewhat disagree,strongly agree,strongly agree,recycle
 Andrew Cheung,3,64,140,3 to 5,running,2,comfort,3,no,less than 1,less than 3 ,75,25,0,0,0,18+,heel,I only run if it is sunny,neutral,somewhat agree,strongly disagree,strongly agree,somewhat agree,charity
 Laura Ingulsrud,4,28,155,3 to 5,lifestyle,1,comfort,3,no,10+,less than 3 ,50,0,0,10,40,18+,not sure,I sometimes run when it is not sunny,strongly disagree,somewhat disagree,somewhat disagree,strongly disagree,somewhat disagree,charity
-Nicole Fenton,5,,,,,,,,,,,,,,,,,,,,,,,,
+Nicole Fenton,5,28,195,,,,,,,,,,,,,,,,,,,,,,
 Quentin Gee,6,39,150,6 to 7,lifestyle,1,appearance,3,no,less than 1,less than 3,40,30,20,10,0,18+,heel,I sometimes run when it is not sunny,somewhat disagree,somewhat agree,somewhat disagree,somewhat agree,neutral,charity
 Curtis Baumann,7,,,,,,,,,,,,,,,,,,,,,,,,
 Max Russer,8,27,165,6 to 7,running,2,comfort,4,no,5 to 10 years,less than 3,100,0,0,0,0,12 to 18,not sure,I only run if it's sunny,neutral,somewhat agree,neutral,strongly agree,somewhat agree,garbage
@@ -46,7 +46,7 @@ Maddie Julian,52,24,152,6 to 7,"running, hybrid, other",1,comfort,1,no,5 to 10,5
 Bri Winkler,30,31,130,6 to 7,other (sandals),1,comfort,3,no,10+,less than 3,50,0,0,50,0,12 to 18,not sure,I sometimes run when it is not sunny,neutral,neutral,somewhat disagree,strongly agree,somewhat agree,"garbage, charity, pass on to someone else"
 Cesar Collado Beitia,72,47,176,3 to 5,lifestyle,2,comfort,"2, 3",no,10+,7 to 10,80,0,0,20,0,18+,forefoot,I often run when it is not sunny,somewhat agree,strongly agree,strongly disagree,strongly agree,strongly agree,garbage
 Daniel Elkin,45,30,155,6 to 7,running,2,comfort,5,no,3 to 5,no,25,0,0,50,25,18+,Not sure,I don't run,neutral,somewhat agree,somewhat disagree,strongly agree,somewhat agree,garbage
-Scott Bui,64,,,,,,,,,,,,,,,,,,,,,,,,
+Scott Bui,64,,170,,,,,,,,,,,,,,,,,,,,,,
 Gary Fox,35,35,155,8+ ,hybrid,3,appearance,2,no,10+,less than 3,40,40,0,10,10,18+,midfoot,I often run in the rain,somewhat disagree,neutral,somewhat disagree,somewhat agree,strongly agree,charity
 Jesse Goldstein,67,38,180,3 to 5,lifestyle,2,comfort,1,no,10+,3 to 5,20,10,0,35,35,18+,not sure,I often run when it is not sunny,somewhat agree,strongly agree,strongly disagree,strongly agree,somewhat agree,garbage
 Paul Ore,49,34,165,6 to 7,lifestyle,2,athletic performance,3,no,10+,3 to 5,50,0,0,10,40,18+,heel,I often run when it is not sunny,somewhat disagree,somewhat agree,somewhat agree,somewhat agree,somewhat agree,garbage
@@ -61,3 +61,4 @@ Shiva Hasson,79,20,135,3 to 5,"lifestyle, hybrid",1,durability,1,every day,3 to 
 Saffy Algarazi,66,21,140,8+,hybrid,1,appearance,3,every day,3 to 5,less than 3,50,50,0,0,0,6 to 12,midfoot,I sometimes run when it is not sunny,strongly agree,strongly agree,neutral,somewhat disagree,strongly agree,garbage
 Bridget Gibbons,76,27,130,3 to 5,"lifestyle, hybrid",2,athletic performance,2,no,10+,less than 3,50,50,0,0,0,12 to 18,not sure,I often run when it is not sunny,somewhat disagree,somewhat agree,somewhat disagree,somewhat agree,neutral,garbage
 Juan Ramirez,31,36,170,3 to 5,running,2,comfort,,no,3 to 5,3 to 5 ,50,30,20,0,0,1 to 6,midfoot,I sometimes run when it is not sunny,strongly disagree,strongly agree,neutral,strongly disagree,strongly disagree,garbage
+Danny Cheung,32,,150,,,,,,,,,,,,,,,,,,,,,,
