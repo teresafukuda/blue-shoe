@@ -59,7 +59,6 @@ totals_biweekly <- clean_biweekly %>%
   mutate ("miles to steps" = miles*2000)# assuming 2000 steps on average per mile
 
 clean_pre <- presurvey_data  %>%
-  rename("name"= 'X1') %>% 
   clean_names(.) %>% 
   mutate ("gait" = question_11) %>%
   mutate ("exercise"= question_1) %>% 
