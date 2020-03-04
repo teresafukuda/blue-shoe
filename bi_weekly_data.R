@@ -36,7 +36,11 @@ tread_depth_raw_initial <- read_csv("Shoe Depth Measurements - initial_control_F
 
 tread_depth_raw_final <- read_csv("Shoe Depth Measurements - wear_shoes_FINAL.csv") #updated with newest dataset 2/8/20 AC
 
+<<<<<<< HEAD
 lab_abrasion_raw <- read_csv("Lab Abrasion Data_Final.csv")
+=======
+lab_abrasion_raw <- read_csv("Lab Abrasion Data_FINAL.csv")
+>>>>>>> 71a81cddce44bffad577168472963d8c5833d18a
 
 # Part II. Clean up the biweekly data, presurvey data and summarize into totals by name of user
 
@@ -434,9 +438,11 @@ tread_model_hist <- ggplot(tread_joined_shoeID, aes(x=avg_depth_change))+
 
 tread_model_hist
 
-tread_error <- tread_joined_details %>%
+tread_error <- tread_joined %>%
   full_join(.,clean_shoe_ID) %>% 
   filter(name=="CONTROL") %>% 
+  group_by(model) %>% 
+  summarize("avg_error"=mean(tread_mass)) %>% 
   drop_na()
   
 # tread_hist_final <- ggplot()
