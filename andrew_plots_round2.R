@@ -20,7 +20,7 @@ library(plm)# regression analysis package
 grams_steps_lm0 <- lm(mass_change ~ 0 + steps, data = full_data_joined)
 summary(grams_steps_lm0)
 
-# P value is less than .01. Multiple R squared is .06152
+# P value very very small ( < .001).  Best p we've found so far. Multiple R squared is .334
 
 # Adding trendline to graph #
 
@@ -34,3 +34,14 @@ grams_steps_scatter_lm <- ggplot(full_data_joined, aes(x=`steps to miles`, y=mas
         axis.title=element_text(size=14))
 
 grams_steps_scatter_lm
+
+######################################################################33
+
+### Multivariate Regression ###
+
+grams_steps_multi <- lm(mass_change ~ weight + steps, data = full_data_joined)
+summary(grams_steps_multi)
+
+# R-squared very small, p value much bigger than other models (p = 0.07) 
+
+
