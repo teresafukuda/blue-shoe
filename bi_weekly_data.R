@@ -36,11 +36,7 @@ tread_depth_raw_initial <- read_csv("Shoe Depth Measurements - initial_control_F
 
 tread_depth_raw_final <- read_csv("Shoe Depth Measurements - wear_shoes_FINAL.csv") #updated with newest dataset 2/8/20 AC
 
-<<<<<<< HEAD
-lab_abrasion_raw <- read_csv("Lab Abrasion Data_Final.csv")
-=======
 lab_abrasion_raw <- read_csv("Lab Abrasion Data_FINAL.csv")
->>>>>>> 71a81cddce44bffad577168472963d8c5833d18a
 
 # Part II. Clean up the biweekly data, presurvey data and summarize into totals by name of user
 
