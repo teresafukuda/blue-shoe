@@ -28,7 +28,7 @@ grams_steps_scatter_lm <- ggplot(full_data_joined, aes(x=`steps to miles`, y=mas
   geom_point()+
   theme_bw()+
   labs(x = "Distance Travelled (miles)", y = "Mass Change (g)")+
-  geom_smooth(method = "lm", color = "indianred1")+ # add se = FALSE to remove error bar
+  geom_abline(intercept=0, slope=grams_steps_lm0$coefficients[1], color='indianred1', size=1.1)+
   geom_hline(yintercept=c(0), color="darkblue")+
   theme(axis.text=element_text(size=12),
         axis.title=element_text(size=14))
