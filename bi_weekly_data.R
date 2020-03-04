@@ -22,21 +22,21 @@ library(ggthemes) # ggplot themes
 
 biweeklydata <- read_csv("Bi-Weekly Wear Test Form FINAL.csv") # edit file name to match the downloaded file, updated 1/6
 
-shoe_id_table <- read_csv("ShoeID_data_forR - EDITED 1_30.csv") # table from google sheets of all participants and their shoe models and ID, updated 1/6
+shoe_id_table <- read_csv("ShoeID_data_forR_FINAL.csv") # table from google sheets of all participants and their shoe models and ID, updated 1/6
 
 presurvey_data <- read_csv("Pre Survey Data - Sheet1.csv") #all the presurvey data, updated 12/3
 
-mass_data <- read_csv("Shoe_mass_forR - Sheet1 (1).csv") #this has the shoe weight data for before and after testing in grams
+mass_data <- read_csv("Shoe_mass_forR_FINAL.csv") #this has the shoe weight data for before and after testing in grams
 
-shoe_deets <- read_csv("ShoeID_data_forR - Shoe Model Names HERE.csv") # sheet 2 in the google sheet has the shoe details about rubber, abrasion, etc.
+shoe_deets <- read_csv("ShoeID_data_forR_Shoe_Model_Names_FINAL.csv") # sheet 2 in the google sheet has the shoe details about rubber, abrasion, etc.
 
 washing_test <- read_csv("WashingTestError - Sheet1.csv") # washing test pre and post measurements
 
-tread_depth_raw_initial <- read_csv("Shoe Depth Measurements - initial_control (1).csv")
+tread_depth_raw_initial <- read_csv("Shoe Depth Measurements - initial_control_FINAL.csv")
 
-tread_depth_raw_final <- read_csv("Shoe Depth Measurements - wear_shoes_final.csv") #updated with newest dataset 2/8/20 AC
+tread_depth_raw_final <- read_csv("Shoe Depth Measurements - wear_shoes_FINAL.csv") #updated with newest dataset 2/8/20 AC
 
-lab_abrasion_raw <- read_csv("Lab Abrasion Data - Sheet1 (1).csv")
+lab_abrasion_raw <- read_csv("Lab Abrasion Data_Final.csv")
 
 # Part II. Clean up the biweekly data, presurvey data and summarize into totals by name of user
 
