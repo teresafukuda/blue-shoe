@@ -24,7 +24,7 @@ biweeklydata <- read_csv("Bi-Weekly Wear Test Form FINAL.csv") # edit file name 
 
 shoe_id_table <- read_csv("ShoeID_data_forR_FINAL.csv") # table from google sheets of all participants and their shoe models and ID, updated 1/6
 
-presurvey_data <- read_csv("Pre Survey Data - Sheet1.csv") #all the presurvey data, updated 12/3
+presurvey_data <- read_csv("Pre Survey Data.csv") #all the presurvey data, updated 12/3
 
 mass_data <- read_csv("Shoe_mass_forR_FINAL.csv") #this has the shoe weight data for before and after testing in grams
 
@@ -144,7 +144,7 @@ full_data_joined <- full_join(mass_data_joined, clean_shoedeets) %>%  #join all 
   select(-c('Shoe ID')) %>% 
   filter(name != "BRI WINKLER") %>% 
   filter(name != "THOMAS BUTERA") %>% 
-  filter(name != "TIMMY HYUNH") %>% 
+  filter(name != "TIMMY HUYNH") %>% 
   filter(name != "CURTIS BAUMANN") %>%
   filter(name != "SHIVA HASSON") %>%
   filter(name != "GARY FOX") %>% 

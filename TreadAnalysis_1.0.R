@@ -4,27 +4,24 @@ library(janitor) # load janitor to clean up dataframe
 library(ggthemes)
 
 
-
+#find the average of the tread mass lost extrapolations from different parts of the foot. 
 tread_mass_average <- tread_joined %>% 
   group_by(shoe_ID) %>% 
   summarize(
     average_tread_mass=mean(tread_mass)
     ) 
 
-#join step data with new data
-
+#join step data with average tread mas lost
 full_data_joined_tread <- full_join(full_data_joined, tread_mass_average) 
 
-#create a data frame that includes normalized mass loss
-
+#create a data frame that includes normalized mass loss, average tread mass divided by steps to miles
 full_data_joined_tread_norm <- full_data_joined_tread %>% 
-  mutate("tread_mass_lost_per_mile"= average_tread_mass/`steps to miles`) %>% 
-  drop_na(mass_lost_per_mile)
+  mutate("tread_mass_lost_per_mile"= average_tread_mass/`steps to miles`) 
 
 full_data_joined_tread_norm
 
 
-
+#run a regression on average_tread_mass lost against distanced travelled
 treadmass_miles_lm <- lm(average_tread_mass ~ `steps to miles`, data = full_data_joined_tread)
 summary(treadmass_miles_lm) 
 #Multiple R-squared:  0.1843,	Adjusted R-squared:  0.1736 
