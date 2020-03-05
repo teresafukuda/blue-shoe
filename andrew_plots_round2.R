@@ -121,8 +121,36 @@ mass_multi_lm3_plot <- ggplot(mass_joined_fixed_noout,aes(x=`steps to miles`,y=m
   stat_function(fun=lmeq3,geom="line")+
   geom_hline(yintercept=c(0), color="dark blue")+
   theme_bw() +
-  scale_y_continuous(limits = c(-7, 2)) + 
+  scale_y_continuous(limits = c(-5, 2)) + 
   scale_x_continuous(limits = c(0, 600)) +
   labs(title = "Forced to zero, No Outliers OR Positive Values", y = "Mass Change (g)", x = "Distance Travelled (Miles)")
 
 mass_multi_lm3_plot
+
+######################################################################################
+### Adding error bars ###
+
+# From Teresa's sensitivity analysis, the mean uncertainty is 1.161679
+
+error <- 1.161679
+x <- mass_joined_fixed_noout$`steps to miles`
+y <- mass_joined_fixed_noout$mass_change
+
+#This works, but looks a little crazy.
+
+mass_multi_lm4_plot <- ggplot(mass_joined_fixed_noout,aes(x=`steps to miles`,y=mass_change,color=weight))+
+  geom_point() +
+  stat_function(fun=lmeq3,geom="line")+
+  geom_hline(yintercept=c(0), color="dark blue")+
+  theme_bw() +
+  scale_y_continuous(limits = c(-5, 2)) + 
+  scale_x_continuous(limits = c(0, 600)) +
+  labs(title = "Forced to zero, No Outliers OR Positive Values", y = "Mass Change (g)", x = "Distance Travelled (Miles)")+
+  geom_errorbar(aes(ymin = mass_change-error, ymax = mass_change+error))
+
+mass_multi_lm4_plot
+
+#Another possible option I found online: 
+
+#arrows(x0=x, y0=y-error, x1=x, y1=y+error, code=3, angle=90, length=0.1)
+
