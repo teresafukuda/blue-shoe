@@ -11,7 +11,7 @@ library(olsrr)
 
 
 
-pre_survey_data <- read_csv("Pre Survey Data.csv") 
+pre_survey_data <- read_csv("Pre Survey Data.csv") #read in survey data
 
 pre_survey_data_weight <- pre_survey_data %>% 
   clean_names(.) %>% 
@@ -100,7 +100,7 @@ lm3equation = function(x){coef(weight_steps_lm3)[2]*x+coef(weight_steps_lm3)[1]}
 
 weight_steps_lm3_plot <- ggplot(tread_joined_fixed_noout,aes(x=`steps to miles`,y=average_tread_mass,color=weight))+
   geom_point() +
-  stat_function(fun=lm2equation,geom="line")+
+  stat_function(fun=lm3equation,geom="line")+
   geom_hline(yintercept=c(0), color="dark blue")+
   theme_bw() +
   scale_y_continuous(limits = c(-7, 2)) + 
