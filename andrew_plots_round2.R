@@ -132,6 +132,8 @@ mass_multi_lm3_plot
 
 # From Teresa's sensitivity analysis, the mean uncertainty is 1.161679
 
+
+
 error <- 1.161679
 x <- mass_joined_fixed_noout$`steps to miles`
 y <- mass_joined_fixed_noout$mass_change
@@ -154,3 +156,4 @@ mass_multi_lm4_plot
 
 #arrows(x0=x, y0=y-error, x1=x, y1=y+error, code=3, angle=90, length=0.1)
 
+#  To-do: find outliers based on rate of mass change versus total mass lost. Also, add error bars just based on model type for our scatterplots.
