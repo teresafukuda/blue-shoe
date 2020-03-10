@@ -1,3 +1,5 @@
+library(Rmisc)
+
 
 ########################################################################################
 
@@ -93,14 +95,32 @@ steps_4Q <- full_data_joined %>%
 massloss_1Q <- steps_1Q %>% 
   mutate(grams_per_mile=mass_change/miles)
 
+# Finding mean and SE to add error bars
+
+summary_1Q <- summarySE(massloss_1Q, measurevar="grams_per_mile")
+
+#Standard error is 0.05977811
+
 massloss_2Q <- steps_2Q %>% 
   mutate(grams_per_mile=mass_change/miles)
+
+summary_2Q <- summarySE(massloss_2Q, measurevar="grams_per_mile")
+
+#Standard error is 	0.01866876
 
 massloss_3Q <- steps_3Q %>% 
   mutate(grams_per_mile=mass_change/miles)
 
+summary_3Q <- summarySE(massloss_3Q, measurevar="grams_per_mile")
+
+#Standard Error is 0.006267213
+
 massloss_4Q <- steps_4Q %>% 
   mutate(grams_per_mile=mass_change/miles)
+
+summary_4Q <- summarySE(massloss_4Q, measurevar="grams_per_mile")
+
+#Standard Error is 0.002032717
 
 mean(massloss_1Q$grams_per_mile, na.rm = TRUE) #-0.1473715
 mean(massloss_2Q$grams_per_mile, na.rm = TRUE) #-0.05501749
@@ -124,6 +144,8 @@ massloss_top10 <- top10miles2 %>%
 
 mean(massloss_top10$grams_per_mile, na.rm = TRUE) # mean is -0.0062230421
 
+summary_top10 <- summarySE(massloss_top10, measurevar="grams_per_mile", na.rm = TRUE) # standard error is 0.001569109
+
 # Bottom 10
 
 # Order and select participants with top 10 in miles walked. Remove participants that didn't walk at all
@@ -142,6 +164,8 @@ massloss_bottom10 <- bottom10miles3 %>%
 
 mean(massloss_bottom10$grams_per_mile, na.rm = TRUE) # mean is -0.2153816
 
+summary_bottom10 <- summarySE(massloss_bottom10, measurevar="grams_per_mile", na.rm = TRUE) # standard error is 0.1174002
+
 #### Making a graph of this data ####
 
 mass_change <- read_csv("rates_of_mass_loss.csv")
@@ -151,5 +175,6 @@ mass_change$interval <- factor(mass_change$interval, levels = mass_change$interv
 mass_change_plot <- ggplot(mass_change, aes(x=interval, y=mass_change_per_mile))+
   geom_point()+
   theme_bw()+
-  labs(title = "Rate of Mass Change with Increasing Wear", x = "Interval of Wear", y = "Average Mass Lost per Mile (g)")
+  labs(title = "Rate of Mass Change with Increasing Wear", x = "Interval of Wear", y = "Average Mass Lost per Mile (g)")+
+  geom_pointrange(aes(ymin=mass_change_per_mile-se, ymax=mass_change_per_mile+se))
 mass_change_plot

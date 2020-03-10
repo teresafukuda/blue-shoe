@@ -1,7 +1,7 @@
-interval,mass_change_per_mile
-Bottom 10 Percent,-0.2153816
-First Quartile,-0.1473715
-Second Quartile,-0.05501749
-Third Quartile,-0.01797436
-Fourth Quartile,-0.01043119
-Top 10 Percent,-0.006223042
+interval,mass_change_per_mile,se
+Bottom 10 Percent,-0.2153816,0.1174002
+First Quartile,-0.1473715,0.05977811
+Second Quartile,-0.05501749,0.01866876
+Third Quartile,-0.01797436,0.006267213
+Fourth Quartile,-0.01043119,0.002032717
+Top 10 Percent,-0.006223042,0.001569109
