@@ -17,18 +17,31 @@ library(plm)# regression analysis package
 
 # Running a regression #
 
-grams_steps_lm0 <- lm(mass_change ~ 0 + steps, data = tread_joined_weight_fixed)
+grams_steps_lm0 <- lm(mass_change ~ 0 + steps, data = mass_joined_fixed_noout)
 summary(grams_steps_lm0)
 
-# P value very very small ( < .001).  Best p we've found so far. Multiple R squared is .334
+# P value very very small ( < .001). Multiple R squared is .4137
 
 # Adding trendline to graph #
 
-grams_steps_scatter_lm <- ggplot(tread_joined_weight_fixed, aes(x=`steps to miles`, y=mass_change))+
+grams_steps_scatter_lm <- ggplot(mass_joined_fixed_noout, aes(x=`steps to miles`, y=mass_change))+
   geom_point()+
   theme_bw()+
   labs(x = "Distance Travelled (miles)", y = "Mass Change (g)")+
-  geom_abline(intercept=0, slope=grams_steps_lm0$coefficients[1], color='indianred1', size=1.1)+
+  geom_abline(intercept=0, slope=grams_steps_lm0$coefficients[1]*x, color='indianred1', size=1.1)+
+  geom_hline(yintercept=c(0), color="darkblue")+
+  theme(axis.text=element_text(size=12),
+        axis.title=element_text(size=14))
+
+grams_steps_scatter_lm
+
+### Looking at these regressions I don't think it makes sense to keep them in this plot. Making one without regression line
+
+
+grams_steps_scatter_lm <- ggplot(mass_joined_fixed_noout, aes(x=`steps to miles`, y=mass_change))+
+  geom_point()+
+  theme_bw()+
+  labs(x = "Distance Travelled (miles)", y = "Mass Change (g)")+
   geom_hline(yintercept=c(0), color="darkblue")+
   theme(axis.text=element_text(size=12),
         axis.title=element_text(size=14))
