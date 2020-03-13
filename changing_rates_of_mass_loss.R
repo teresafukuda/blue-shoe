@@ -7,24 +7,24 @@ library(Rmisc)
 
 # Finding mean and median of number of steps to divide shoes into two groups to compare
 
-median(full_data_joined$steps, na.rm = TRUE)
+median(mass_joined_fixed_noout$`miles to steps`, na.rm = TRUE)
 
-#gives 114,800 as median steps
+#gives 115,000 as median steps
 
-mean(full_data_joined$steps, na.rm = TRUE)
+mean(mass_joined_fixed_noout$`miles to steps`, na.rm = TRUE)
 
-#gives 234959 as mean steps
+#gives 228614.3 as mean steps
 
 ### Dividing the data into two sections: runners with steps greater than the mean, and runners with steps below the mean; doing the same by median
 
 # By median
 
-steps_lowerhalf_bymedian <- full_data_joined %>% 
-  filter(steps <= 114800) %>% 
+steps_lowerhalf_bymedian <- mass_joined_fixed_noout %>% 
+  filter(steps <= 115000) %>% 
   filter(miles != 0)
 
-steps_upperhalf_bymedian <- full_data_joined %>% 
-  filter(steps > 114800) %>% 
+steps_upperhalf_bymedian <- mass_joined_fixed_noout %>% 
+  filter(steps > 115000) %>% 
   filter(miles != 0)
 
 lowerhalf_mass_bymedian <- steps_lowerhalf_bymedian %>% 
@@ -43,12 +43,12 @@ mean(upperhalf_mass_bymedian$grams_per_mile, na.rm = TRUE)
 
 #### By mean number of steps ####
 
-steps_lowerhalf_bymean <- full_data_joined %>% 
-  filter(steps <= 234959) %>% 
+steps_lowerhalf_bymean <- mass_joined_fixed_noout %>% 
+  filter(steps <= 228614.3) %>% 
   filter(miles != 0)
 
-steps_upperhalf_bymean <- full_data_joined %>% 
-  filter(steps > 234959) %>% 
+steps_upperhalf_bymean <- mass_joined_fixed_noout %>% 
+  filter(steps > 228614.3) %>% 
   filter(miles != 0)
 
 lowerhalf_mass_bymean <- steps_lowerhalf_bymean %>% 
@@ -70,26 +70,26 @@ mean(upperhalf_mass_bymean$grams_per_mile, na.rm = TRUE)
 
 ####### Trying with quartiles ####
 
-summary(full_data_joined$steps)
+summary(mass_joined_fixed_noout$`miles to steps`)
 
 # First quartile is 35633, mean is 234,959, 3rd quartile is 381,600, max is 1205000
 
 steps_1Q <- full_data_joined %>% 
-  filter(steps <= 35633) %>% 
+  filter(steps <= 49440) %>% 
   filter(miles != 0)
 
 steps_2Q <- full_data_joined %>% 
-  filter(steps > 35633) %>% 
-  filter(steps <= 234959) %>% 
+  filter(steps > 49440) %>% 
+  filter(steps <= 323580) %>% 
   filter(miles != 0)
 
 steps_3Q <- full_data_joined %>% 
-  filter(steps > 234959) %>% 
-  filter(steps <= 381600) %>% 
+  filter(steps > 323580) %>% 
+  filter(steps <= 1098480) %>% 
   filter(miles != 0)  
 
 steps_4Q <- full_data_joined %>% 
-  filter(steps > 381600) %>% 
+  filter(steps > 1098480) %>% 
   filter(miles != 0)
 
 massloss_1Q <- steps_1Q %>% 
@@ -99,7 +99,7 @@ massloss_1Q <- steps_1Q %>%
 
 summary_1Q <- summarySE(massloss_1Q, measurevar="grams_per_mile")
 
-#Standard error is 0.05977811
+#Standard error is 0.0472939
 
 massloss_2Q <- steps_2Q %>% 
   mutate(grams_per_mile=mass_change/miles)
@@ -113,19 +113,19 @@ massloss_3Q <- steps_3Q %>%
 
 summary_3Q <- summarySE(massloss_3Q, measurevar="grams_per_mile")
 
-#Standard Error is 0.006267213
+#Standard Error is 0.002177654
 
 massloss_4Q <- steps_4Q %>% 
   mutate(grams_per_mile=mass_change/miles)
 
 summary_4Q <- summarySE(massloss_4Q, measurevar="grams_per_mile")
 
-#Standard Error is 0.002032717
+#Standard Error is 0.00101758
 
-mean(massloss_1Q$grams_per_mile, na.rm = TRUE) #-0.1473715
-mean(massloss_2Q$grams_per_mile, na.rm = TRUE) #-0.05501749
-mean(massloss_3Q$grams_per_mile, na.rm = TRUE) #-0.01797436
-mean(massloss_4Q$grams_per_mile, na.rm = TRUE) #-0.01043119
+mean(massloss_1Q$grams_per_mile, na.rm = TRUE) #-0.1194021
+mean(massloss_2Q$grams_per_mile, na.rm = TRUE) #-0.05163573
+mean(massloss_3Q$grams_per_mile, na.rm = TRUE) #-0.01106753
+mean(massloss_4Q$grams_per_mile, na.rm = TRUE) #-0.006974372
 
 #Looking at top 10% and bottom 10%
 
@@ -133,7 +133,7 @@ mean(massloss_4Q$grams_per_mile, na.rm = TRUE) #-0.01043119
 
 # Order and select participants with top 10 in miles walked
 
-top10miles <- full_data_joined[with(full_data_joined,order(-steps)),]
+top10miles <- mass_joined_fixed_noout[with(mass_joined_fixed_noout,order(-steps)),]
 
 top10miles2 <- top10miles[1:10,]
 
@@ -142,15 +142,15 @@ top10miles2 <- top10miles[1:10,]
 massloss_top10 <- top10miles2 %>% 
   mutate(grams_per_mile=mass_change/miles)
 
-mean(massloss_top10$grams_per_mile, na.rm = TRUE) # mean is -0.0062230421
+mean(massloss_top10$grams_per_mile, na.rm = TRUE) # mean is -0.01484602
 
-summary_top10 <- summarySE(massloss_top10, measurevar="grams_per_mile", na.rm = TRUE) # standard error is 0.001569109
+summary_top10 <- summarySE(massloss_top10, measurevar="grams_per_mile", na.rm = TRUE) # standard error is 0.004427872
 
 # Bottom 10
 
 # Order and select participants with top 10 in miles walked. Remove participants that didn't walk at all
 
-bottom10miles <- full_data_joined %>% 
+bottom10miles <- mass_joined_fixed_noout %>% 
   filter(miles != 0) 
 
 bottom10miles2 <- bottom10miles[with(bottom10miles,order(steps)),] 
@@ -162,9 +162,9 @@ bottom10miles3 <- bottom10miles2[1:10,]
 massloss_bottom10 <- bottom10miles3 %>% 
   mutate(grams_per_mile=mass_change/miles)
 
-mean(massloss_bottom10$grams_per_mile, na.rm = TRUE) # mean is -0.2153816
+mean(massloss_bottom10$grams_per_mile, na.rm = TRUE) # mean is -0.298494
 
-summary_bottom10 <- summarySE(massloss_bottom10, measurevar="grams_per_mile", na.rm = TRUE) # standard error is 0.1174002
+summary_bottom10 <- summarySE(massloss_bottom10, measurevar="grams_per_mile", na.rm = TRUE) # standard error is 0.08305663
 
 #### Making a graph of this data ####
 

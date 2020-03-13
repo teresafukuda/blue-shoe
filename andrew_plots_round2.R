@@ -98,21 +98,21 @@ cooksdplot1 <- ols_plot_cooksd_chart(mass_multi_lm1)
 cooksdplot2 <- ols_plot_cooksd_chart(mass_multi_lm2)
 
 #find outlier values, this just prints the outliers from a boxplot
-average_mass_outliers <- boxplot(mass_joined_weight_fixed_nopos$mass_change)
-outvals = boxplot(mass_joined_weight_fixed_nopos$mass_change)$out
-outvals # the outliers in nopos are -4.93965, -5.82240, -7.16285, -10.59740, -7.88275, -10.46510, -8.12925, -4.69680, -4.45265
+average_mass_outliers <- boxplot(mass_joined_weight_fixed_nopos$measuremass_lost_per_mile)
+outvals = boxplot(mass_joined_weight_fixed_nopos$measuremass_lost_per_mile)$out
+outvals # the outliers in nopos are -0.1462051, -0.2286885, -0.1694932, -0.7860500, -0.1838642, -0.1874984, -0.4416800
 
 ### Make data frame with all Cook's D outliers removed
 
 mass_joined_fixed_noout <- mass_joined_weight_fixed_nopos %>%
-  filter(mass_change > -4.45265) 
+  filter(mass_change < -0.1462051) 
 
 ### Fitting a model with outliers removed
 
 mass_multi_lm3 <- lm(formula = mass_change ~ 0 + weight + `steps to miles`, data = mass_joined_fixed_noout) #linear model with weight as a contributing factor
 
 summary(mass_multi_lm3)
-# p << .001, R-squared = 0.7249
+# p << .001, R-squared = 0.5988
 
 lmeq3 = function(x){coef(mass_multi_lm3)[2]*x+coef(mass_multi_lm3)[1]}
 
@@ -156,4 +156,3 @@ mass_multi_lm4_plot
 
 #arrows(x0=x, y0=y-error, x1=x, y1=y+error, code=3, angle=90, length=0.1)
 
-#  To-do: find outliers based on rate of mass change versus total mass lost. Also, add error bars just based on model type for our scatterplots.
