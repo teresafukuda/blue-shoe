@@ -169,3 +169,24 @@ mass_multi_lm4_plot
 
 #arrows(x0=x, y0=y-error, x1=x, y1=y+error, code=3, angle=90, length=0.1)
 
+########### Making updated scatterplots for tread change vs distance travelled and tread-derived mass change vs distance travelled #########################
+
+#run a regression on average_tread_mass lost against distanced travelled
+treadmass_miles_lm2 <- lm(average_tread_mass ~ 0 + weight + `steps to miles`, data = tread_joined_fixed_noout)
+summary(treadmass_miles_lm2) 
+#Multiple R-squared:  0.7032,	Adjusted R-squared:  0.69 
+#F-statistic: 90.04 on 2 and 76 DF,  p-value <<< .001
+
+lmeq4 = function(x){coef(treadmass_miles_lm2)[2]*x+coef(treadmass_miles_lm2)[1]}
+
+#add trendline to
+treadmass_miles_lm_graph<- ggplot(tread_joined_fixed_noout, aes(x=`steps to miles`, y= average_tread_mass, color=weight))+
+  geom_point()+
+  stat_function(fun=lmeq3,geom="line")+
+  ylim(-8,4)+
+  xlim(NA, 600)+
+  theme_bw()+
+  labs(title = "Tread-derived Mass Loss, no outliers, positives, forced to 0", x = "Distance Travelled (Miles)", y = "Mass Change (g)")+
+  geom_hline(yintercept=c(0), color="darkblue")
+treadmass_miles_lm_graph
+
