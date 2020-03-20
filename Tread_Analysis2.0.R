@@ -185,3 +185,7 @@ tread_sample_size_noout_nopos <- tread_joined_fixed_noout %>%
 #ULTRA BOOST STELLA	4
 #NA is for filtered out individuals
 
+#########Normalize with steps to miles data########
+
+
+

@@ -14,15 +14,24 @@ tread_mass_average <- tread_joined %>%
 #join step data with average tread mas lost
 full_data_joined_tread <- full_join(full_data_joined, tread_mass_average) 
 
-#create a data frame that includes normalized mass loss, average tread mass divided by steps to miles
+#create a data frame that includes normalized mass loss, average tread mass divided by steps to miles, filtered out ALL CONTROLLS, and participants with not data
 full_data_joined_tread_norm <- full_data_joined_tread %>% 
-  mutate("tread_mass_lost_per_mile"= average_tread_mass/`steps to miles`) 
+  mutate("tread_mass_lost_per_mile"= average_tread_mass/`steps to miles`) %>% 
+  filter(name != "CONTROL") %>% 
+  filter(name != "BRI WINKLER") %>% 
+  filter(name != "THOMAS BUTERA") %>% 
+  filter(name != "TIMMY HUYNH") %>% 
+  filter(name != "CURTIS BAUMANN") %>%
+  filter(name != "SHIVA HASSON") %>%
+  filter(name != "GARY FOX") %>% 
+  filter(name != "LINDA HUYNH") %>% 
+  drop_na(average_tread_mass)
 
 full_data_joined_tread_norm
 
 
 #run a regression on average_tread_mass lost against distanced travelled
-treadmass_miles_lm <- lm(average_tread_mass ~ `steps to miles`, data = full_data_joined_tread)
+treadmass_miles_lm <- lm(formula = average_tread_mass ~ `steps to miles`, data = full_data_joined_tread)
 summary(treadmass_miles_lm) 
 #Multiple R-squared:  0.1843,	Adjusted R-squared:  0.1736 
 #F-statistic: 17.17 on 1 and 76 DF,  p-value: 8.772e-05
@@ -97,11 +106,11 @@ treadmasslost_model
 
 mean_average_tread_mass_change <- mean(full_data_joined_tread_norm$average_tread_mass, na.rm = TRUE)
 mean_average_tread_mass_change
-#-1.841239
+#-2.0765
 
-mean_average_tread_mass_changenorm <- mean(full_data_joined_tread_norm$mass_lost_per_mile, na.rm = TRUE)
+mean_average_tread_mass_changenorm <- mean(full_data_joined_tread_norm$tread_mass_lost_per_mile, na.rm = TRUE)
 mean_average_tread_mass_changenorm
-#-0.03541883
+#-0.042222
 
 
 #############Calculating measurement error for tread depth measurements#############

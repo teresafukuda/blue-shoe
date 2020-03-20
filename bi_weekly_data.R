@@ -150,6 +150,8 @@ full_data_joined <- full_join(mass_data_joined, clean_shoedeets) %>%  #join all 
   filter(name != "LINDA HUYNH") %>% 
   mutate("measuremass_lost_per_mile"= mass_change/`steps to miles`) 
 
+mean
+
 step_calculations <- full_data_joined %>% 
   mutate("milesteps"= steps/2000) %>% 
   mutate("g_per_milesteps"= mass_change/milesteps) %>% 
@@ -459,6 +461,7 @@ tread_by_location <- tread_joined %>%
 # heel = 1, outer arch = 2, ball = 3, tip = 4
 
 tread_by_location
+
 
 
 
