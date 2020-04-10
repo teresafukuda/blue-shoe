@@ -134,9 +134,14 @@ mass_multi_lm3_plot <- ggplot(mass_joined_fixed_noout,aes(x=`steps to miles`,y=m
   stat_function(fun=lmeq3,geom="line")+
   geom_hline(yintercept=c(0), color="dark blue")+
   theme_bw() +
+  theme(axis.text.x = element_text(angle = 75, hjust=1), 
+        axis.text=element_text(size=12),
+        axis.title=element_text(size=14,face="bold"),
+        legend.text = element_text(size = 15),
+        legend.title = element_text(size = 20))+
   scale_y_continuous(limits = c(-5, 2)) + 
   scale_x_continuous(limits = c(0, 600)) +
-  labs(title = "Directly Measured Mass Change by Distance", y = "Mass Change (g)", x = "Distance Travelled (Miles)")
+  labs(y = "Mass Change (g)", x = "Distance Travelled (Miles)", color='Weight (lbs)')
 
 mass_multi_lm3_plot
 
@@ -183,11 +188,16 @@ lmeq4 = function(x){coef(treadmass_miles_lm2)[2]*x+coef(treadmass_miles_lm2)[1]}
 treadmass_miles_lm_graph<- ggplot(tread_joined_fixed_noout, aes(x=`steps to miles`, y= average_tread_mass, color=weight))+
   geom_point()+
   stat_function(fun=lmeq3,geom="line")+
-  ylim(-8,4)+
+  ylim(-8,0.5)+
   xlim(NA, 600)+
   theme_bw()+
-  labs(title = "Tread-derived Mass Loss by Distance", x = "Distance Travelled (Miles)", y = "Mass Change (g)")+
-  geom_hline(yintercept=c(0), color="darkblue")+
+  theme(axis.text.x = element_text(angle = 75, hjust=1), 
+        axis.text=element_text(size=12),
+        axis.title=element_text(size=14,face="bold"),
+        legend.text = element_text(size = 15),
+        legend.title = element_text(size = 20))+
+  labs(x = "Distance Travelled (Miles)", y = "Mass Change (g)", color='Weight (lbs)')+
+  geom_hline(yintercept=c(0), color="darkblue")
   
 treadmass_miles_lm_graph
 
