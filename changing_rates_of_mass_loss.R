@@ -175,6 +175,11 @@ mass_change$interval <- factor(mass_change$interval, levels = mass_change$interv
 mass_change_plot <- ggplot(mass_change, aes(x=interval, y=mass_change_per_mile))+
   geom_point()+
   theme_bw()+
-  labs(title = "Rate of Mass Change with Increasing Wear", x = "Interval of Wear", y = "Average Mass Lost per Mile (g)")+
+  theme(axis.text.x = element_text(angle = 75, hjust=1), 
+        axis.text=element_text(size=12),
+        axis.title=element_text(size=14,face="bold"),
+        legend.text = element_text(size = 15),
+        legend.title = element_text(size = 20))+
+  labs(x = "Interval of Wear", y = "Average Mass Lost per Mile (g)")+
   geom_pointrange(aes(ymin=mass_change_per_mile-se, ymax=mass_change_per_mile+se))
 mass_change_plot
