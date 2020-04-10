@@ -136,7 +136,7 @@ mass_multi_lm3_plot <- ggplot(mass_joined_fixed_noout,aes(x=`steps to miles`,y=m
   theme_bw() +
   scale_y_continuous(limits = c(-5, 2)) + 
   scale_x_continuous(limits = c(0, 600)) +
-  labs(title = "Forced to zero, No Outliers OR Positive Values", y = "Mass Change (g)", x = "Distance Travelled (Miles)")
+  labs(title = "Directly Measured Mass Change by Distance", y = "Mass Change (g)", x = "Distance Travelled (Miles)")
 
 mass_multi_lm3_plot
 
@@ -186,7 +186,8 @@ treadmass_miles_lm_graph<- ggplot(tread_joined_fixed_noout, aes(x=`steps to mile
   ylim(-8,4)+
   xlim(NA, 600)+
   theme_bw()+
-  labs(title = "Tread-derived Mass Loss, no outliers, positives, forced to 0", x = "Distance Travelled (Miles)", y = "Mass Change (g)")+
-  geom_hline(yintercept=c(0), color="darkblue")
+  labs(title = "Tread-derived Mass Loss by Distance", x = "Distance Travelled (Miles)", y = "Mass Change (g)")+
+  geom_hline(yintercept=c(0), color="darkblue")+
+  
 treadmass_miles_lm_graph
 
