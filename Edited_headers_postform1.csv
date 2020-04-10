@@ -1,0 +1,39 @@
+Timestamp,name,Shoe ID Left (ex: L1),Shoe ID Right (ex: R1) (same as left ID!),zip_code,total_current,athletic,casual,dress,sandal,other,other_specific,total_summed,total_owned,used_purchase,retired_from_wear,retired_ugly,fit_of_shoes,performance_of_shoes,wear_frequency,shoe_comfort,breakin_period_wks,shoe_blisters,wouldyoubuy_shoes,previous_adidas,compare_wear_other_adidas,traction,durability,shoes_wore_faster,wantback
+12/26/19 13:33,Andrew Llanes,L18,R18,92127,3,1,3,0,0,0,,4,10+,0,5+,5+,5,5,Once a month,5,0,1,2,1,0,,,,1
+1/2/20 14:30,Bri Winkler,L30,R30,93013,5,1,2,0,2,0,,5,10+,1,1,0,4,4,Once a month,4,0,1,3,1,0,,,0,1
+12/25/19 21:38,Calvin Chau,L60,R60,92683,5,1,2,1,1,0,,5,8,0,1,0,5,4,Almost every day,4,2,3,3,1,0,0,0,-1,1
+12/26/19 9:04,Christopher Kim,L-24,R-24,92078,6,2,3,0,1,0,,6,9,0,2,0,2,4,Once a week,4,0,1,2,1,1,0,0,0,1
+12/3/19 20:39,Daniel Elkin,L45,R45,93109,3,2,2,1,1,1,,7,4,1,1,0,5,5,4 to 5 times a week,5,3,1,2,0,0,,,,
+12/9/19 19:26,David Mun (Adizero),L33,R33,90034,10,3,10,1,1,0,,15,10+,1,1,0,5,5,Once a week,5,0,1,3,1,0,0,0,-2,1
+12/9/19 19:28,David Mun (Stella),L37,L37,90034,10,3,10,1,1,0,,15,10+,1,1,0,5,5,1 to 3 times a week,5,0,1,5,1,0,0,0,-2,1
+12/27/19 3:09,Duncan Chung,L27,R27,92086,6,1,3,0,2,0,,6,6,2,1,0,5,4,4 to 5 times a week,3,1,1,2,1,0,0,0,1,0
+12/6/19 10:18,Gary Fox,L35,R35,93105,10,8,5,1,0,0,,14,10+,1,1,1,3,2,Once a week,2,0,1,1,1,0,,,0,1
+12/26/19 10:09,Henry Cheung,L48,R48,91780,5,2,2,1,0,0,,5,7,0,1,0,5,4,4 to 5 times a week,4,1,1,3,1,1,1,0,1,1
+12/7/19 9:08,James fuller ,L26,R26,93101,10,4,6,2,0,6,"Skate shoes(vans, Huf)",18,10+,4+,5+,4,5,5,1 to 3 times a week,4,1,1,3,1,1,1,1,-2,1
+12/3/19 20:08,Jesse Goldstein,L65,R65,,4,2,1,,1,,,4,9,1,0,0,5,5,4 to 5 times a week,5,1,1,1,0,0,,,-2,1
+12/4/19 19:52,Juan Ramirez,L31,R31,93103,5,2,1,2,0,0,,5,5,2,2,1,3,5,1 to 3 times a week,3,1,1,3,0,1,0,1,0,0
+12/27/19 13:55,Justin Tseng,L25,R25,92506,5,2,1,1,1,0,,5,6,0,0,0,3,3,Once a week,4,3,1,2,1,1,0,-1,0,1
+12/25/19 22:33,Kevin Akahoshi,L20,R20,92807,3,2,1,0,0,0,,3,10+,1,0,0,5,3,Almost every day,3,2,1,3,1,0,0,0,0,0
+12/6/19 9:05,Kyle Monper ,L53,R53,93117,3,1,0,0,1,1,Vasque hiking boots,3,5,0,0,0,5,5,4 to 5 times a week,4,0,1,1,1,0,,,0,1
+12/6/19 12:01,Laura Ingulsrud ,L04,R04,93101,9,1,4,2,2,0,,9,10+,1,1,0,3,3,Once a week,3,3,1,2,0,NA,,,0,1
+12/26/19 0:29,Maddie Julian,L52,R52,95129,9,3,3,2,1,0,,9,10+,2,3,3,4,4,Once a week,4,0,1,3,1,0,,,-1,1
+12/30/19 7:36,Matt Panopio,L11,R11,98122,8,2,5,0,0,1,Boots,8,10+,0,1,1,4,3,1 to 3 times a week,3,0,1,2,1,0,,,-1,1
+12/28/19 8:30,Max Russer,L08,R08,93109,2,1,1,0,1,0,,3,5,1,1,0,3,2,Once a month,1,5,2,1,1,0,,,0,0
+12/21/19 12:12,My Vo Luong,R39,R39,92844,6,2,2,1,1,0,,6,10+,0,1,0,4,5,1 to 3 times a week,5,0,1,3,1,0,0,0,-2,1
+12/29/19 10:57,Nelson Gould,L10,R10,93106,5,2,2,0,1,0,,5,9,0,2,0,5,3,Once a week,3,1,1,2,1,1,0,0,-1,1
+12/25/19 20:08,Nicole Fenton,L05,R05,92024,7,1,3,2,1,,,7,10+,0,2,0,5,4,Once a week,4,1,2,3,1,0,,,-1,1
+12/10/19 13:59,Quentin Gee,L06,R06,93193,6,2,2,1,1,0,,6,10+,0,0,0,4,4,Once a week,3,3,1,2,0,NA,,,,1
+12/7/19 14:28,Rachel Torres,L70,R70,93117,9,3,2,1,2,0,,8,10+,1,2,0,2,3,Once a week,3,2,1,1,1,0,,,-2,0
+12/26/19 1:39,Ryan Zahrae,L34,R34,92603,4,2,2,0,0,0,,4,7,0,1,0,4,5,Almost every day,4,1,1,2,1,0,,,-1,1
+12/5/19 21:34,Saffy Algarazi ,L66,R66,93109,2,2,4,6,1,0,"Vans slip ons, dress shoes, sandals ",13,5,1,3,2,5,5,Almost every day,4,2,1,3,1,1,0,1,-2,1
+12/9/19 14:49,Thomas Butera,L71,R71,93117,3,0,3,0,0,0,,3,7,2,2,2,5,5,Once a month,4,1,1,1,1,0,,,0,0
+12/12/19 20:15,Thomas Butera,L71,R71,93117,3,0,3,0,0,0,,3,7,2,2,2,5,5,Once a month,4,0,1,1,1,0,0,0,0,0
+12/12/19 20:16,Thomas Butera,L75,L75,93117,3,0,3,0,0,0,,3,7,2,2,2,5,5,Once a month,4,0,1,1,1,0,0,0,0,0
+12/26/19 13:19,Travis Lee,L32,R32,93101,8,3,2,2,1,0,,8,8,0,1,0,4,5,Almost every day,5,0,1,4,0,NA,,,,
+12/26/19 0:45,Victor Nguyenbui,L21,R21,92604,5,2,1,1,1,0,,5,10+,1,1,1,4,5,4 to 5 times a week,5,2,1,3,1,0,,,0,Yes
+12/6/19 13:02,Vincent Thivierge,L65,R65,93117,4,2,1,0,1,0,,4,10+,1,1,0,4,4,Once a week,4,0,1,2,1,0,1,1,-1,Yes
+12/26/19 12:47,Woo Jin Kim,L50,R50,92833,4,2,1,0,1,0,,4,9,1,2,0,4,4,Almost every day,5,1,5,4,1,1,1,0,-1,Yes
+1/6/20 13:33,Michael Chung,L28,R28,92612,6,3,2,1,0,0,,6,10+,0,2,2,5,3,Once a week,3,1,1,2,1,0,,,0,No
+1/6/20 13:53,Bridget Gibbons,L76,R76,93101,6,1,3,0,2,0,,6,10+,0,0,1,3,3,Once a month,4,3,1,1,1,0,0,0,-2,No
+1/6/20 14:08,Scott Bui,L64,R64,92841,4,3,0,0,1,0,n/a,4,6,1,1,1,4,4,4 to 5 times a week,4,1,1,5,0,NA,,,0,Yes
+1/6/20 15:02,Erwin Gomez,L58,R58,92603,10,6,4,0,1,0,,11,10+,2,1,2,4,2,Once a week,1,3,4,1,1,1,0,0,0,No
