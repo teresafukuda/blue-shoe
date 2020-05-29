@@ -185,7 +185,39 @@ tread_sample_size_noout_nopos <- tread_joined_fixed_noout %>%
 #ULTRA BOOST STELLA	4
 #NA is for filtered out individuals
 
-#########Normalize with steps to miles data########
+####Averages####
+
+mean(tread_joined_fixed_noout$tread_mass_lost_per_mile)
+#-0.05547505 grams/mile
+
+mean(mass_joined_fixed_noout2$measuremass_lost_per_mile)
+#-0.03245783
+
+
+###############Quartiles for Tread Derived Mass loss#################
+
+summary(tread_joined_fixed_noout$`steps to miles`)
+# First quartile is 29.47, mean is 140.81, 3rd quartile is 221.35, max is 602.50
+
+
+steps_1Q_tread <- full_data_joined_tread_norm %>% 
+  filter(`steps to miles`<= 29.47) 
+
+steps_2Q_tread <- full_data_joined_tread_norm %>% 
+  filter(`steps to miles` > 29.47) %>% 
+  filter(`steps to miles` <= 221.35) 
+
+steps_3Q_tread <- full_data_joined_tread_norm %>% 
+  filter(`steps to miles` > 221.35) %>% 
+  filter(`steps to miles` <= 602.50) 
+
+steps_4Q_tread <- full_data_joined_tread_norm %>% 
+  filter(`steps to miles` == 602.50) 
 
 
 
+
+mean(steps_1Q_tread$tread_mass_lost_per_mile, na.rm = TRUE) #-0.09192266
+mean(steps_2Q_tread$tread_mass_lost_per_mile, na.rm = TRUE) #-0.0296915
+mean(steps_3Q_tread$tread_mass_lost_per_mile, na.rm = TRUE) #-0.01108025
+mean(steps_4Q_tread$tread_mass_lost_per_mile, na.rm = TRUE) #-0.007556803

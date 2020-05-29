@@ -78,7 +78,7 @@ mass_multi_lm1_plot
 zero = 0
 
 mass_joined_weight_fixed_nopos <- tread_joined_weight_fixed %>% 
-  filter(mass_change < zero)
+  filter(mass_change < zero) ####this is using the wrong data frame#####
 
 mass_multi_lm2 <- lm(formula = mass_change ~ 0 + weight + `steps to miles`, data = mass_joined_weight_fixed_nopos) #linear model with weight as a contributing factor
 
